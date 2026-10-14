@@ -381,11 +381,12 @@ final class LV_Theme_Settings {
 		$current = get_option( self::OPTION_KEY, array() );
 		$current = is_array( $current ) ? $current : array();
 
+		// merge, а не перезапись: ключи, которых нет в форме, должны уцелеть.
+		$merged = array_merge( $current, $clean );
+
 		// Аудит: старые → новые значения.
 		do_action( 'lv_options_save_before', $current, $merged );
 
-		// merge, а не перезапись: ключи, которых нет в форме, должны уцелеть.
-		$merged = array_merge( $current, $clean );
 		update_option( self::OPTION_KEY, $merged );
 
 		// У плагина есть кэш чтения — сбрасываем, иначе в этом же запросе
