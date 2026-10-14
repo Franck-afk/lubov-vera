@@ -1,0 +1,50 @@
+# WordPress core
+/wp-admin/
+/wp-includes/
+/wp-content/upgrade/
+/wp-content/backup-*/
+*.log
+
+# Composer
+/vendor/
+/composer.lock
+
+# Node
+/node_modules/
+/package-lock.json
+/yarn.lock
+
+# Build artifacts
+*.built.css
+*.built.js
+/plugins/quote-block/build/
+
+# IDE / OS
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Local config
+wp-config.php
+wp-config-local.php
+.env
+.env.local
+
+# Backup files
+*.bak
+*.backup
+*.sql.gz
+*.zip
+*.tar.gz
+
+# Temp
+*~
+*.tmp
+.temp/
+
+# Debug
+debug.log
+error_log
