@@ -561,7 +561,19 @@ add_action(
 add_filter(
 	'wp_headers',
 	function ( $headers ) {
-		if ( headers_sent() ) {
+		$is_admin = false;
+		if ( function_exists( 'is_admin' ) ) {
+			$is_admin = is_admin();
+		}
+		if ( ! $is_admin ) {
+			$raw_request_uri   = filter_input( INPUT_SERVER, 'REQUEST_URI', FILTER_UNSAFE_RAW );
+			$raw_request_uri   = '' === $raw_request_uri ? '' : $raw_request_uri;
+			$server_request_uri = wp_unslash( $raw_request_uri );
+			$request_uri        = $server_request_uri;
+			$is_admin           = 0 === strpos( $request_uri, '/wp-admin/' );
+		}
+
+		if ( headers_sent() || $is_admin ) {
 			return $headers;
 		}
 
@@ -605,22 +617,23 @@ add_filter(
  * Использует transient с ключом по IP + action.
  */
 add_action(
-	'check_ajax_referer',
+	'check_admin_referer',
 	function ( $action, $result ) {
 		if ( ! $result ) {
 			return;
 		}
 
-		$limited_actions = array( 'lv_options_save', 'lv_options_reset' );
+		// check_admin_referer вызывается с action = 'lv_options' (nonce action).
+		$limited_actions = array( 'lv_options' );
 		if ( ! in_array( $action, $limited_actions, true ) ) {
 			return;
 		}
 
-		$ip      = lv_get_client_ip();
-		$key     = 'lv_ratelimit_' . $action . '_' . md5( $ip );
-		$limit   = 30;
-		$window  = MINUTE_IN_SECONDS;
-		$current = (int) get_transient( $key );
+		$ip       = lv_get_client_ip();
+		$key      = 'lv_ratelimit_save_' . md5( $ip );
+		$limit    = 30;
+		$window   = MINUTE_IN_SECONDS;
+		$current  = (int) get_transient( $key );
 
 		if ( $current >= $limit ) {
 			wp_die( esc_html__( 'Слишком много запросов. Попробуйте позже.', 'lubov-vera' ), 429 );
