@@ -1,0 +1,91 @@
+.preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #111;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 50px !important;
+  opacity: 1;
+  z-index: 9999;
+}
+
+.preloader-text {
+  font-family: "Inter", sans-serif;
+  text-align: center;
+  line-height: 0.5;
+  font-size: 50px !important;
+}
+
+.preloader-text p {
+  margin: 0;
+  font-size: 50px !important;
+  line-height: 1;
+}
+
+.preloader-text p + p {
+  margin-top: 5px !important;
+}
+
+.preloader-text span {
+  display: inline-block;
+  margin-right: 2px;
+}
+
+/* Тёмная тема */
+html.dark .preloader {
+  background-color: #111 !important;
+  color: #ffffff !important;
+}
+
+html.dark .preloader-text {
+  color: #ffffff !important;
+}
+
+html.dark .preloader-text p {
+  color: #ffffff !important;
+}
+
+html.dark .preloader-text span {
+  color: #ffffff !important;
+}
+
+/* Светлая тема */
+html:not(.dark) .preloader {
+  background-color: #f5f5f5 !important;
+  color: #000000 !important;
+}
+
+html:not(.dark) .preloader-text {
+  color: #000000 !important;
+}
+
+html:not(.dark) .preloader-text p {
+  color: #000000 !important;
+}
+
+html:not(.dark) .preloader-text span {
+  color: #000000 !important;
+}
+
+/* Мобильная версия */
+@media (max-width: 767px) {
+  .preloader {
+    font-size: 24px !important;
+  }
+
+  .preloader-text {
+    font-size: 24px !important;
+  }
+
+  .preloader-text p {
+    font-size: 24px !important;
+  }
+
+  .preloader-text p + p {
+    margin-top: 3px !important;
+  }
+}

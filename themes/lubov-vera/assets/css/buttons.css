@@ -1,0 +1,104 @@
+/* Принудительные стили для кнопок .btn.btn--primary */
+html body .btn.btn--primary,
+body .btn.btn--primary,
+.btn.btn--primary {
+  background-color: var(--lv-color-accent, #3ab3e6) !important;
+  background: var(--lv-color-accent, #3ab3e6) !important;
+  border: none !important;
+  color: #ffffff !important;
+  transition: background-color 0.3s ease;
+}
+
+html body .btn.btn--primary:hover,
+body .btn.btn--primary:hover,
+.btn.btn--primary:hover {
+  background-color: #2a9fd6 !important;
+  background: #2a9fd6 !important;
+  color: #ffffff !important;
+}
+
+/* Кнопки в header */
+html body .header__actions .btn.btn--primary,
+body .header__actions .btn.btn--primary,
+.header__actions .btn.btn--primary {
+  background-color: var(--lv-color-accent, #3ab3e6) !important;
+  background: var(--lv-color-accent, #3ab3e6) !important;
+  transition: background-color 0.3s ease;
+}
+
+html body .header__actions .btn.btn--primary:hover,
+body .header__actions .btn.btn--primary:hover,
+.header__actions .btn.btn--primary:hover {
+  background-color: #2a9fd6 !important;
+  background: #2a9fd6 !important;
+  color: #ffffff !important;
+}
+
+/* Кнопки в мобильном меню */
+html body .mobile-menu__actions .btn.btn--primary,
+body .mobile-menu__actions .btn.btn--primary,
+.mobile-menu__actions .btn.btn--primary {
+  background-color: var(--lv-color-accent, #3ab3e6) !important;
+  background: var(--lv-color-accent, #3ab3e6) !important;
+  transition: background-color 0.3s ease;
+}
+
+html body .mobile-menu__actions .btn.btn--primary:hover,
+body .mobile-menu__actions .btn.btn--primary:hover,
+.mobile-menu__actions .btn.btn--primary:hover {
+  background-color: #2a9fd6 !important;
+  background: #2a9fd6 !important;
+  color: #ffffff !important;
+}
+
+/* Тёмная тема */
+html.dark body .btn.btn--primary,
+body.dark .btn.btn--primary,
+.dark .btn.btn--primary {
+  background-color: #ffffff !important;
+  background: #ffffff !important;
+  color: #1f2937 !important;
+  transition: background-color 0.3s ease;
+}
+
+html.dark body .btn.btn--primary:hover,
+body.dark .btn.btn--primary:hover,
+.dark .btn.btn--primary:hover {
+  background-color: #e5e7eb !important;
+  background: #e5e7eb !important;
+  color: #1f2937 !important;
+}
+
+html.dark body .header__actions .btn.btn--primary,
+body.dark .header__actions .btn.btn--primary,
+.dark .header__actions .btn.btn--primary {
+  background-color: #ffffff !important;
+  background: #ffffff !important;
+  color: #1f2937 !important;
+  transition: background-color 0.3s ease;
+}
+
+html.dark body .header__actions .btn.btn--primary:hover,
+body.dark .header__actions .btn.btn--primary:hover,
+.dark .header__actions .btn.btn--primary:hover {
+  background-color: #e5e7eb !important;
+  background: #e5e7eb !important;
+  color: #1f2937 !important;
+}
+
+html.dark body .mobile-menu__actions .btn.btn--primary,
+body.dark .mobile-menu__actions .btn.btn--primary,
+.dark .mobile-menu__actions .btn.btn--primary {
+  background-color: #ffffff !important;
+  background: #ffffff !important;
+  color: #1f2937 !important;
+  transition: background-color 0.3s ease;
+}
+
+html.dark body .mobile-menu__actions .btn.btn--primary:hover,
+body.dark .mobile-menu__actions .btn.btn--primary:hover,
+.dark .mobile-menu__actions .btn.btn--primary:hover {
+  background-color: #e5e7eb !important;
+  background: #e5e7eb !important;
+  color: #1f2937 !important;
+}

@@ -205,6 +205,24 @@ class Options {
 				'default' => array(),
 			),
 
+			// Карусель событий на главной (между трансляциями и календарём).
+			'events_title'         => array(
+				'type'    => 'text',
+				'default' => '',
+			),
+			'events_subtitle'      => array(
+				'type'    => 'text',
+				'default' => '',
+			),
+			'events_show'          => array(
+				'type'    => 'toggle',
+				'default' => '1',
+			),
+			'events'               => array(
+				'type'    => 'array',
+				'default' => array(),
+			),
+
 			// Карточки на архивах CPT: archive.php читает их напрямую.
 			'testimonies_cards'    => array(
 				'type'    => 'array',
@@ -263,6 +281,23 @@ class Options {
 			'donation_mixplat'     => array(
 				'type'    => 'text',
 				'default' => '',
+			),
+			// Форма пожертвования на странице «Мы строим храм» (Leyka).
+			'donation_show'        => array(
+				'type'    => 'toggle',
+				'default' => '1',
+			),
+			'donation_title'       => array(
+				'type'    => 'text',
+				'default' => '',
+			),
+			'donation_desc'        => array(
+				'type'    => 'textarea',
+				'default' => '',
+			),
+			'donation_campaign_id' => array(
+				'type'    => 'absint',
+				'default' => 0,
 			),
 			'cookie_consent'       => array(
 				'type'    => 'array',

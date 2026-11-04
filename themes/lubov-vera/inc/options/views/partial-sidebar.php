@@ -37,7 +37,7 @@ $lv_version = function_exists( 'wp_get_theme' ) ? wp_get_theme()->get( 'Version'
 		if ( ! empty( $lv_section['desc'] ) ) {
 			echo esc_html( $lv_section['desc'] );
 		} else {
-			esc_html_e( 'Выберите раздел во вкладках выше, чтобы увидеть его описание.', 'lubov-vera' );
+			esc_html_e( 'Выберите раздел во вкладках слева, чтобы увидеть его описание.', 'lubov-vera' );
 		}
 		?>
 	</div>

@@ -44,6 +44,10 @@
 /********************************************************************
  * Layout
  *******************************************************************/
+
+/********************************************************************
+ * Layout
+ *******************************************************************/
 .lv-options__body {
 	display: flex;
 	gap: 2rem;
@@ -55,7 +59,10 @@
 	.lv-options__body { padding-right: 2rem; }
 }
 
-.lv-options__main { flex: 1 0 0; }
+.lv-options__main {
+	flex: 1 0 0;
+	min-width: 0;
+}
 
 .lv-options__sidebar {
 	flex: 0 0 300px;
@@ -63,16 +70,53 @@
 	padding-top: 20px;
 }
 
+@media (max-width: 1199px) {
+	/* Сайдбар уходит под контент на узких экранах. */
+	.lv-options__sidebar {
+		flex: 0 0 auto;
+		max-width: 100%;
+		width: 100%;
+		padding-top: 0;
+	}
+}
+
+.lv-options__layout {
+	display: flex;
+	gap: 2rem;
+	align-items: flex-start;
+}
+
+.lv-options__tablist {
+	flex: 0 0 200px;
+	max-width: 200px;
+	position: sticky;
+	top: 20px;
+}
+
+.lv-options__content {
+	flex: 1 0 0;
+	min-width: 0;
+}
+
+@media (max-width: 1199px) {
+	.lv-options__layout { flex-direction: column; }
+	.lv-options__tablist {
+		flex: 0 0 auto;
+		max-width: 100%;
+		width: 100%;
+		position: static;
+	}
+}
+
 /********************************************************************
- * Tabs
+ * Tabs (вертикальные, слева)
  *******************************************************************/
 .lv-options__tabs {
 	display: flex;
-	flex-wrap: wrap;
-	gap: .4vw;
+	flex-direction: column;
+	gap: 4px;
 	margin: 0;
-	padding-top: 9px;
-	padding-bottom: 0;
+	padding-top: 0;
 	line-height: inherit;
 }
 
@@ -83,22 +127,21 @@
 }
 
 .lv-options__tab {
-	border-bottom: none;
-	padding: 7px calc(.2vw + .2%);
+	display: block;
+	padding: 8px 14px;
 	font-size: 14px;
 	line-height: 24px;
 	background: #fbfbfb;
 	color: #777;
 	text-decoration: none;
-	box-shadow: inset 0 -2px 5px rgba(0,0,0,.05);
-	border-top: 2px solid #ccc;
-	border-bottom: 1px solid #e6e6e6;
+	border: 1px solid #e6e6e6;
+	border-left: 3px solid #ccc;
+	border-radius: .25rem;
 	outline: none;
-	border-radius: .1rem .1rem 0 0;
 }
 
 @media (min-width: 1440px) {
-	.lv-options__tab { padding: 7px calc(.5vw + .5%); }
+	.lv-options__tab { padding: 8px 18px; }
 }
 
 .lv-options__tab:focus,
@@ -110,9 +153,12 @@
 .lv-options__tab.is-active {
 	background: #fff;
 	color: #000;
-	box-shadow: none;
-	border-top: 2px solid #01a0e2;
-	border-bottom: 1px solid #fff;
+	border-left-color: #01a0e2;
+}
+
+.lv-options__tab:hover {
+	background: #f0f6fc;
+	color: #1d2327;
 }
 
 .lv-options__tab-panel {
@@ -129,42 +175,7 @@
 .lv-options__tab-panel[hidden] { display: none !important; }
 
 /********************************************************************
- * Settings save container
- *******************************************************************/
-/*
- * Обычно такая панель статична — она видна только если доскроллить до
- * низа формы. Нам нужно, чтобы кнопки были под рукой всегда, поэтому
- * position: sticky; bottom: 0: панель занимает своё место в потоке (место
- * под неё зарезервировано, последнее поле не перекрывается), но пока её
- * родное место ниже кромки окна — прижата к нижней границе экрана.
- *
- * Именно sticky, а не fixed: fixed вырвал бы панель из потока и требовал
- * знать ширину меню админки (#adminmenuback), которая меняется при
- * сворачивании, и компенсировать её нижним отступом контента.
- *
- * Диапазон прилипания ограничен формой (родителем): доскроллив до её
- * конца, панель встаёт на естественное место и ничего не hide.
- */
-.lv-options__toolbar {
-	position: sticky;
-	bottom: 0;
-
-	background: #fff;
-	border-radius: 0 0 .5rem .5rem;
-	border-top: 1px solid #e5e5e5;
-
-	padding: 20px 25px;
-	box-shadow: 0 -10px 20px -20px rgba(0,0,0,0.2);
-	z-index: 100;
-}
-
-.lv-options__toolbar p {
-	margin: 0;
-	padding: 0;
-}
-
-/********************************************************************
- * Widgets
+ * Widgets (сайдбар)
  *******************************************************************/
 .lv-options__widget {
 	position: relative;
@@ -198,6 +209,43 @@
 	display: block;
 	text-align: left;
 	margin: 2px 0;
+}
+
+/********************************************************************
+ * Settings save container
+ *******************************************************************/
+/*
+ * Обычно такая панель статична — она видна только если доскроллить до
+ * низа формы. Нам нужно, чтобы кнопки были под рукой всегда, поэтому
+ * position: sticky; bottom: 0: панель занимает своё место в потоке (место
+ * под неё зарезервировано, последнее поле не перекрывается), но пока её
+ * родное место ниже кромки окна — прижата к нижней границе экрана.
+ *
+ * Именно sticky, а не fixed: fixed вырвал бы панель из потока и требовал
+ * знать ширину меню админки (#adminmenuback), которая меняется при
+ * сворачивании, и компенсировать её нижним отступом контента.
+ *
+ * Тулбар лежит вне главной формы — в самом низу .lv-options, после всех
+ * панелей (в т.ч. кастомных). Диапазон прилипания ограничен этим
+ * контейнером: доскроллив до конца страницы, панель встаёт на естественное
+ * место.
+ */
+.lv-options__toolbar {
+	position: sticky;
+	bottom: 0;
+
+	background: #fff;
+	border-radius: 0 0 .5rem .5rem;
+	border-top: 1px solid #e5e5e5;
+
+	padding: 20px 25px;
+	box-shadow: 0 -10px 20px -20px rgba(0,0,0,0.2);
+	z-index: 100;
+}
+
+.lv-options__toolbar p {
+	margin: 0;
+	padding: 0;
 }
 
 /********************************************************************
@@ -263,6 +311,73 @@
 
 /* Свёрнутые описания: pseudo-кнопка «Свернуть описания». */
 .lv-descs-off .lv-field-body p.description { display: none; }
+
+/* ------------------------------------------------- Переключатель (свитч) */
+
+.lv-toggle {
+	display: inline-flex;
+	align-items: center;
+	gap: 10px;
+	cursor: pointer;
+	user-select: none;
+}
+
+.lv-toggle__input {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	padding: 0;
+	overflow: hidden;
+	clip: rect(0 0 0 0);
+	border: 0;
+}
+
+.lv-toggle__track {
+	position: relative;
+	flex: 0 0 auto;
+	width: 44px;
+	height: 24px;
+	border-radius: 999px;
+	background: #c3c4c7;
+	transition: background-color 0.15s ease;
+}
+
+.lv-toggle__thumb {
+	position: absolute;
+	top: 3px;
+	left: 3px;
+	width: 18px;
+	height: 18px;
+	border-radius: 50%;
+	background: #fff;
+	box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+	transition: transform 0.15s ease;
+}
+
+.lv-toggle__input:checked + .lv-toggle__track {
+	background: #01a0e2;
+}
+
+.lv-toggle__input:checked + .lv-toggle__track .lv-toggle__thumb {
+	transform: translateX(20px);
+}
+
+.lv-toggle__input:focus-visible + .lv-toggle__track {
+	outline: 2px solid #01a0e2;
+	outline-offset: 2px;
+}
+
+.lv-toggle__state {
+	font-size: 13px;
+	color: #646970;
+}
+
+.lv-toggle__on { display: none; }
+.lv-toggle__off { display: inline; }
+
+.lv-toggle__input:checked ~ .lv-toggle__state .lv-toggle__on { display: inline; }
+.lv-toggle__input:checked ~ .lv-toggle__state .lv-toggle__off { display: none; }
 
 .lv-options__tab-panel .lv-placeholder {
 	background: #fbfbfb;
@@ -366,21 +481,108 @@
 .lv-rep__col input[type='url'],
 .lv-rep__col select { width: 100%; max-width: 640px; }
 
-.lv-rep__remove {
+/*
+ * Компактный медиа-контрол внутри строки повторителя: превью-мини +
+ * URL + кнопки медиатеки. Дата-атрибуты data-lv-media-* — того же
+ * контракта, что у поля .lv-media, поэтому JS общий.
+ */
+.lv-rep__media {
+	display: flex;
+	gap: 10px;
+	align-items: flex-start;
+}
+
+.lv-rep__media-preview {
+	flex: 0 0 auto;
+	width: 56px;
+	height: 56px;
+	margin: 0;
+	border: 1px solid #e5e5e5;
+	border-radius: 4px;
+}
+
+.lv-rep__media-preview img {
+	border-radius: 3px;
+}
+
+/* Превью файла (тип file в повторителе): имя документа вместо картинки. */
+.lv-rep__media[data-lv-file] .lv-media__preview {
+	width: auto;
+	min-width: 56px;
+	height: auto;
+	min-height: 56px;
+	display: flex;
+	align-items: center;
+	padding: 6px 10px;
+}
+
+.lv-media__file {
+	font-size: 12px;
+	line-height: 1.4;
+	word-break: break-word;
+}
+
+.lv-rep__media-controls {
+	flex: 1 1 auto;
+	min-width: 0;
+}
+
+.lv-rep__media-url { width: 100%; max-width: 640px; }
+
+.lv-rep__media-buttons {
+	display: flex;
+	gap: 6px;
+	margin-top: 6px;
+}
+
+.lv-rep__date { max-width: 200px; }
+
+/* Иконка-триггер календарика jQuery UI не должна растягиваться. */
+.lv-rep__media-buttons .button img,
+.ui-datepicker-trigger { vertical-align: middle; }
+
+/*
+ * Колонка действий строки: копировать + удалить, стеком у правого края
+ * на всю высоту строки — иначе при grid-row: 1 кнопки налезали бы на поля.
+ */
+.lv-rep__actions {
 	grid-column: 3;
 	grid-row: 1 / -1;
 	justify-self: end;
 	align-self: start;
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+}
+
+.lv-rep__drag,
+.lv-rep__copy,
+.lv-rep__remove {
 	width: 30px;
 	height: 30px;
 	padding: 0;
 	border: 1px solid #e5e5e5;
 	border-radius: 4px;
 	background: #fff;
-	color: #b32d2e;
 	cursor: pointer;
 	line-height: 1;
 }
+
+.lv-rep__drag {
+	color: #787c82;
+	cursor: grab;
+}
+
+.lv-rep__drag:active { cursor: grabbing; }
+
+.lv-rep__copy { color: #2271b1; }
+
+.lv-rep__copy:hover {
+	background: #f0f6fc;
+	border-color: #2271b1;
+}
+
+.lv-rep__remove { color: #b32d2e; }
 
 .lv-rep__remove:hover {
 	background: #fcf0f1;
@@ -393,13 +595,21 @@
 	font-style: italic;
 }
 
+/* Место, куда строка упадёт при перетаскивании (jQuery UI sortable). */
+.lv-rep__placeholder {
+	border: 1px dashed #a7aaad;
+	border-radius: .5rem;
+	background: #f6f7f7;
+	visibility: visible !important;
+}
+
 .lv-rep__add { margin-top: 10px; }
 
 @media screen and (max-width: 782px) {
 	/* На узких экранах колонки в одну, кнопка — первая в своей строке. */
 	.lv-rep__row { grid-template-columns: minmax(0, 1fr); }
 	.lv-rep__col--wide { grid-column: 1; }
-	.lv-rep__remove { grid-column: 1; grid-row: auto; justify-self: start; }
+	.lv-rep__actions { grid-column: 1; grid-row: auto; justify-self: start; flex-direction: row; }
 	.lv-field { padding-right: 0; }
 }
 
@@ -509,19 +719,180 @@
 
 /* ------------------------------------------- Адаптив */
 
-@media (max-width: 1199px) {
-	/* Левая колонка во всю ширину, сайдбар уходит под неё. */
-	.lv-options__sidebar {
-		flex: 0 0 auto;
-		max-width: 100%;
-		width: 100%;
-		padding-top: 0;
-	}
-}
-
 @media (max-width: 782px) {
 	.lv-options__tabs { gap: 2px; }
 	.lv-options__tab { flex: 1 1 auto; text-align: center; }
 	.lv-options__tab-panel { padding: 20px 14px; }
 	.lv-field-header { margin: 30px -14px 20px; padding: 20px 14px 0; }
+}
+/* ------------------------------------- Календарь (jQuery UI datepicker) */
+
+/*
+ * WP ядром не отдаёт CSS для jQuery UI, поэтому минимальные стили
+ * datepicker держим тут. Див #ui-datepicker-div jQuery UI создаёт
+ * в body — вне нашего .wrap.
+ */
+#ui-datepicker-div {
+	background: #fff;
+	border: 1px solid #c3c4c7;
+	border-radius: 6px;
+	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+	padding: 10px;
+	font-size: 13px;
+	color: #2c3338;
+	display: none;
+	z-index: 100009 !important; /* Выше админбара WP. */
+}
+
+#ui-datepicker-div .ui-datepicker-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 6px;
+	margin: 0 0 8px;
+	padding: 0;
+	border: 0;
+	background: none;
+	font-weight: 600;
+}
+
+#ui-datepicker-div .ui-datepicker-title {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+	text-align: center;
+}
+
+#ui-datepicker-div .ui-datepicker-prev,
+#ui-datepicker-div .ui-datepicker-next {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 26px;
+	height: 26px;
+	border: 1px solid #dcdcde;
+	border-radius: 4px;
+	background: #f6f7f7;
+	color: #2c3338;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+#ui-datepicker-div .ui-datepicker-prev:hover,
+#ui-datepicker-div .ui-datepicker-next:hover {
+	background: #f0f0f1;
+	border-color: #8c8f94;
+}
+
+#ui-datepicker-div .ui-datepicker-prev span,
+#ui-datepicker-div .ui-datepicker-next span {
+	display: none; /* Стрелки рисуем символами ниже. */
+}
+
+#ui-datepicker-div .ui-datepicker-prev::before { content: '‹'; font-size: 18px; line-height: 1; }
+#ui-datepicker-div .ui-datepicker-next::before { content: '›'; font-size: 18px; line-height: 1; }
+
+#ui-datepicker-div select {
+	font-size: 12px;
+	border: 1px solid #dcdcde;
+	border-radius: 4px;
+	background: #fff;
+	color: #2c3338;
+	padding: 2px 4px;
+	max-width: 110px;
+}
+
+#ui-datepicker-div table.ui-datepicker-calendar {
+	border-collapse: collapse;
+	margin: 0;
+}
+
+#ui-datepicker-div .ui-datepicker-calendar th {
+	padding: 4px 6px;
+	border: 0;
+	font-size: 11px;
+	font-weight: 600;
+	color: #646970;
+	text-align: center;
+}
+
+#ui-datepicker-div .ui-datepicker-calendar td {
+	padding: 0;
+	border: 0;
+	text-align: center;
+}
+
+#ui-datepicker-div .ui-datepicker-calendar td a,
+#ui-datepicker-div .ui-datepicker-calendar td span {
+	display: block;
+	padding: 5px 7px;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	color: #2271b1;
+	text-decoration: none;
+	line-height: 1.2;
+}
+
+#ui-datepicker-div .ui-datepicker-calendar td a:hover {
+	background: #f0f6fc;
+	border-color: #2271b1;
+}
+
+#ui-datepicker-div .ui-datepicker-calendar td.ui-datepicker-today a {
+	background: #fcf9e8;
+	border-color: #dba617;
+	font-weight: 600;
+}
+
+#ui-datepicker-div .ui-datepicker-calendar .ui-state-active {
+	background: #2271b1 !important;
+	border-color: #2271b1 !important;
+	color: #fff !important;
+}
+
+#ui-datepicker-div .ui-datepicker-calendar .ui-datepicker-other-month a {
+	color: #a7aaad;
+}
+
+#ui-datepicker-div .ui-datepicker-buttonpane {
+	display: flex;
+	gap: 6px;
+	justify-content: space-between;
+	margin: 8px 0 0;
+	padding: 6px 0 0;
+	border-top: 1px solid #f0f0f1;
+}
+
+#ui-datepicker-div .ui-datepicker-current,
+#ui-datepicker-div .ui-datepicker-close {
+	padding: 3px 8px;
+	border: 1px solid #dcdcde;
+	border-radius: 4px;
+	background: #f6f7f7;
+	font-size: 12px;
+	text-decoration: none;
+	color: #2c3338;
+	cursor: pointer;
+}
+
+#ui-datepicker-div .ui-datepicker-current:hover,
+#ui-datepicker-div .ui-datepicker-close:hover {
+	background: #f0f0f1;
+	border-color: #8c8f94;
+}
+
+/* ------------------------------------ Панель «Экспорт / Импорт» */
+
+/* JSON-тексты выгрузки/импорта — моноширинно, без переноса строк. */
+.lv-code {
+	font-family: Consolas, Monaco, "Andale Mono", monospace;
+	font-size: 12px;
+	line-height: 1.5;
+	white-space: pre;
+	overflow-x: auto;
+}
+
+/* Файл JSON поверх текстовой области — небольшой вертикальный отступ. */
+[data-lv-import-file] {
+	margin-top: 4px;
 }

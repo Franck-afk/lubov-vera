@@ -8,7 +8,7 @@
  */
 
 if ( ! defined( '_S_VERSION' ) ) {
-	define( '_S_VERSION', '1.0.5' );
+	define( '_S_VERSION', '1.0.13' );
 }
 
 if ( ! function_exists( 'lv_get_setting' ) ) {
@@ -27,6 +27,21 @@ if ( ! function_exists( 'lv_get_setting' ) ) {
 		}
 		return array_key_exists( $key, $settings ) ? $settings[ $key ] : $fallback;
 	}
+}
+
+// Seed Church Info widget into sidebar-1 if not already present.
+$widget_option = get_option( 'widget_lv_church_info' );
+if ( ! $widget_option ) {
+	$sidebars = get_option( 'sidebars_widgets', array() );
+	$number   = count( (array) ( isset( $sidebars['sidebar-1'] ) ? $sidebars['sidebar-1'] : array() ) ) + 1;
+	$instance = array(
+		'address' => lv_get_setting( 'address' ),
+		'phone'   => lv_get_setting( 'phone' ),
+		'email'   => lv_get_setting( 'email' ),
+	);
+	update_option( 'widget_lv_church_info', array( $number => $instance ) );
+	$sidebars['sidebar-1'][] = 'lv_church_info-' . $number;
+	update_option( 'sidebars_widgets', $sidebars );
 }
 
 add_action(
@@ -63,6 +78,22 @@ function lubov_vera_setup() {
 
 	add_theme_support( 'html5', array( 'search-form', 'comment-form', 'comment-list', 'gallery', 'caption', 'style', 'script' ) );
 	add_theme_support( 'customize-selective-refresh-widgets' );
+
+	register_sidebar(
+		array(
+			'name'          => esc_html__( 'Sidebar', 'lubov-vera' ),
+			'id'            => 'sidebar-1',
+			'description'   => esc_html__( 'Add widgets here.', 'lubov-vera' ),
+			'before_widget' => '<section id="%1$s" class="widget single-sidebar-card %2$s">',
+			'after_widget'  => '</section>',
+			'before_title'  => '<h2 class="widget-title">',
+			'after_title'   => '</h2>',
+		)
+	);
+
+	add_filter( 'gutenberg_use_widgets_block_editor', '__return_false', 99 );
+	add_filter( 'use_widgets_block_editor', '__return_false', 99 );
+
 	add_theme_support(
 		'custom-logo',
 		array(
@@ -188,13 +219,95 @@ function lubov_vera_scripts() {
 	// Календарь и фильтр служений - на главной и страницах служений.
 	if ( is_front_page() || is_page_template( 'page-ministries.php' ) || is_singular( 'ministry' ) ) {
 		wp_enqueue_script( 'lubov-vera-calendar', get_template_directory_uri() . '/assets/js/calendar.js', array(), _S_VERSION, true );
+
+		$calendar_address = function_exists( 'lv_get_address' ) ? lv_get_address() : '';
+		$calendar_offset  = wp_timezone()->getOffset( new DateTimeImmutable( 'now' ) ) / 60;
+
+		wp_localize_script(
+			'lubov-vera-calendar',
+			'lvCalendarData',
+			array(
+				'events'   => function_exists( 'lv_get_schedule_calendar_events' ) ? lv_get_schedule_calendar_events() : array(),
+				'location' => '' !== $calendar_address ? $calendar_address : 'ул. Ворошилова, 82, г. Ижевск',
+				'offset'   => (int) $calendar_offset,
+			)
+		);
+
 		wp_enqueue_script( 'lubov-vera-services-filter', get_template_directory_uri() . '/assets/js/services-filter.js', array(), _S_VERSION, true );
 	}
 }
 add_action( 'wp_enqueue_scripts', 'lubov_vera_scripts' );
 
+/**
+ * Оформление формы пожертвования Leyka.
+ *
+ * Отдельный хук с высоким приоритетом: стили плагина подключаются на
+ * стандартном приоритете, поэтому наш файл печатается после них и
+ * переопределяет шаблон «star».
+ *
+ * @return void
+ */
+function lubov_vera_leyka_styles() {
+	if ( ! is_page_template( 'page-construction.php' ) ) {
+		return;
+	}
+
+	wp_enqueue_style(
+		'lubov-vera-leyka',
+		get_template_directory_uri() . '/assets/css/leyka.css',
+		array( 'lubov-vera-main-style' ),
+		_S_VERSION
+	);
+}
+add_action( 'wp_enqueue_scripts', 'lubov_vera_leyka_styles', 99 );
+
+/**
+ * Leyka: включить свои стили/скрипты на шаблоне «Мы строим храм».
+ *
+ * Плагин подключает ассеты, только если видит шорткод в post_content, а у нас
+ * шорткод собирается в шаблоне. Оба фильтра — штатные точки расширения Лейки.
+ *
+ * @param mixed $value Текущее значение из плагина.
+ * @return mixed
+ */
+function lubov_vera_leyka_screening( $value ) {
+	return is_page_template( 'page-construction.php' ) ? true : $value;
+}
+add_filter( 'leyka_form_is_screening', 'lubov_vera_leyka_screening' );
+add_filter( 'leyka_modern_template_displayed', 'lubov_vera_leyka_screening' );
+
+/**
+ * Leyka: класс `leyka-js` на <html>.
+ *
+ * Плагин печатает этот скрипт без nonce, а CSP темы блокирует inline-скрипты
+ * без nonce. Повторяем его здесь с nonce — от класса зависят CSS-состояния
+ * формы (оверлей, закрытие, финальный экран).
+ *
+ * @return void
+ */
+function lubov_vera_leyka_js_class() {
+	if ( ! is_page_template( 'page-construction.php' ) ) {
+		return;
+	}
+
+	printf(
+		'<script nonce="%1$s">document.documentElement.classList.add("leyka-js");</script>' . "\n",
+		esc_attr( $GLOBALS['lv_csp_nonce'] )
+	);
+}
+add_action( 'wp_head', 'lubov_vera_leyka_js_class', 11 );
+
+require get_template_directory() . '/inc/schedule.php';
 require get_template_directory() . '/inc/class-church-walker-nav-menu.php';
 require get_template_directory() . '/inc/menu-icons.php';
+require get_template_directory() . '/inc/class-lv-church-info-widget.php';
+
+add_action(
+	'widgets_init',
+	function () {
+		register_widget( 'LV_Church_Info_Widget' );
+	}
+);
 
 // Экран настроек темы: пункт меню «Настройки сайта». Класс сам вешает
 // хуки admin_menu и admin_enqueue_scripts при подключении.
@@ -566,8 +679,8 @@ add_filter(
 			$is_admin = is_admin();
 		}
 		if ( ! $is_admin ) {
-			$raw_request_uri   = filter_input( INPUT_SERVER, 'REQUEST_URI', FILTER_UNSAFE_RAW );
-			$raw_request_uri   = '' === $raw_request_uri ? '' : $raw_request_uri;
+			$raw_request_uri    = filter_input( INPUT_SERVER, 'REQUEST_URI', FILTER_UNSAFE_RAW );
+			$raw_request_uri    = '' === $raw_request_uri ? '' : $raw_request_uri;
 			$server_request_uri = wp_unslash( $raw_request_uri );
 			$request_uri        = $server_request_uri;
 			$is_admin           = 0 === strpos( $request_uri, '/wp-admin/' );
@@ -579,16 +692,18 @@ add_filter(
 
 		$nonce = $GLOBALS['lv_csp_nonce'];
 
+		// *.mixplat.ru — виджет оплаты Лейки (cdn/widgets/iframe).
 		$csp = implode(
 			'; ',
 			array(
 				"default-src 'self'",
-				"script-src 'self' 'nonce-{$nonce}' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com 'unsafe-inline'",
+				"script-src 'self' 'nonce-{$nonce}' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://*.mixplat.ru 'unsafe-inline'",
 				"style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://fonts.googleapis.com",
 				"font-src 'self' data: https://fonts.gstatic.com https://cdnjs.cloudflare.com",
 				"img-src 'self' data: https:",
-				"connect-src 'self' https://rutube.ru https://cdn.jsdelivr.net",
-				"frame-src 'self' https://rutube.ru https://www.youtube.com https://www.youtube-nocookie.com",
+				"connect-src 'self' https://rutube.ru https://cdn.jsdelivr.net https://*.mixplat.ru https://*.donation.ru",
+				"frame-src 'self' https://rutube.ru https://www.youtube.com https://www.youtube-nocookie.com https://*.mixplat.ru",
+				"worker-src 'self' blob:",
 				"object-src 'none'",
 				"base-uri 'self'",
 				"form-action 'self'",
@@ -613,6 +728,24 @@ add_filter(
 );
 
 /**
+ * Nonce для всех inline-скриптов WordPress.
+ *
+ * CSP темы содержит nonce, поэтому `'unsafe-inline'` игнорируется: любой
+ * inline-скрипт без nonce блокируется. Хук канонический — так nonce получают
+ * speculation rules ядра, данные `wp_localize_script` (в т.ч. Leyka) и т. п.
+ */
+add_filter(
+	'wp_inline_script_attributes',
+	function ( $attributes ) {
+		if ( ! is_admin() && ! empty( $GLOBALS['lv_csp_nonce'] ) && empty( $attributes['nonce'] ) ) {
+			$attributes['nonce'] = $GLOBALS['lv_csp_nonce'];
+		}
+
+		return $attributes;
+	}
+);
+
+/**
  * Rate limiting для AJAX-экшенов настроек (save/reset)
  * Использует transient с ключом по IP + action.
  */
@@ -629,11 +762,11 @@ add_action(
 			return;
 		}
 
-		$ip       = lv_get_client_ip();
-		$key      = 'lv_ratelimit_save_' . md5( $ip );
-		$limit    = 30;
-		$window   = MINUTE_IN_SECONDS;
-		$current  = (int) get_transient( $key );
+		$ip      = lv_get_client_ip();
+		$key     = 'lv_ratelimit_save_' . md5( $ip );
+		$limit   = 30;
+		$window  = MINUTE_IN_SECONDS;
+		$current = (int) get_transient( $key );
 
 		if ( $current >= $limit ) {
 			wp_die( esc_html__( 'Слишком много запросов. Попробуйте позже.', 'lubov-vera' ), 429 );
@@ -756,6 +889,15 @@ add_action(
 	1
 );
 
+add_action(
+	'lv_options_import_before',
+	function ( $old_settings, $new_settings ) {
+		lv_audit_settings_change( $old_settings, $new_settings, 'import' );
+	},
+	10,
+	2
+);
+
 /**
  * Безопасные куки
  */
@@ -770,20 +912,6 @@ add_filter(
 		return $params;
 	}
 );
-
-/**
- * Скрываем версию WP
- */
-remove_action( 'wp_head', 'wp_generator' );
-add_filter( 'the_generator', '__return_empty_string' );
-
-/**
- * Удаляем emoji
- */
-remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
-remove_action( 'wp_print_styles', 'print_emoji_styles' );
-remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
-remove_action( 'admin_print_styles', 'print_emoji_styles' );
 
 /**
  * Минимальная длина пароля

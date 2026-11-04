@@ -2,8 +2,12 @@
 /**
  * Панель сохранения (.lv-options__toolbar).
  *
- * Сидит внизу формы, внутри левой колонки: белая подложка, верхняя граница,
+ * Лежит в самом низу страницы, после всех панелей (включая кастомные —
+ * Экспорт/Импорт со своей формой). Белая подложка, верхняя граница,
  * скругление снизу и тень вверх. Показывает кнопки и строку статуса AJAX.
+ *
+ * Тулбар вне главной формы, поэтому кнопка «Сохранить» привязана к ней
+ * атрибутом form="lv-options-form" — иначе submit извне формы не сработал бы.
  *
  * Ожидает: $tabs, $active_tab.
  *
@@ -29,7 +33,7 @@ if ( isset( $tabs[ $active_tab ]['label'] ) ) {
 			<?php esc_html_e( 'Сбросить всё', 'lubov-vera' ); ?>
 		</button>
 
-		<button type="submit" class="button button-primary button-large lv-save" data-lv-save>
+		<button type="submit" form="lv-options-form" class="button button-primary button-large lv-save" data-lv-save>
 			<span class="lv-spinner" data-lv-spinner hidden></span>
 			<span class="lv-save__label" data-lv-save-label><?php esc_html_e( 'Сохранить', 'lubov-vera' ); ?></span>
 		</button>

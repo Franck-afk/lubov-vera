@@ -1,0 +1,341 @@
+/**
+ * Оформление формы пожертвования Leyka (шаблон «star»).
+ *
+ * Подключается только на странице «Мы строим храм» (page-construction.php),
+ * после стилей плагина, поэтому переопределяет их.
+ */
+
+/* ---------------------------------------------------------- Токены формы */
+:root {
+	--lv-leyka-accent: #f36421;
+	--lv-leyka-accent-tint: rgba(243, 100, 33, 0.06);
+	--lv-leyka-border: #dae7f2;
+	--lv-leyka-text: #1f2123;
+	--lv-leyka-muted: #8c9cab;
+	--lv-leyka-note-bg: rgba(230, 243, 255, 0.55);
+	--lv-leyka-card-bg: #ffffff;
+}
+
+html.dark {
+	--lv-leyka-accent: #f36421;
+	--lv-leyka-accent-tint: rgba(243, 100, 33, 0.18);
+	--lv-leyka-border: rgba(255, 255, 255, 0.22);
+	--lv-leyka-text: #f3f4f6;
+	--lv-leyka-muted: #9ca3af;
+	--lv-leyka-note-bg: rgba(255, 255, 255, 0.06);
+	--lv-leyka-card-bg: #1f2937;
+}
+/* Карточка формы: белая (или тёмная в тёмной теме) с мягкой тенью. */
+.donate-card {
+	background-color: var(--lv-leyka-card-bg);
+	border: 0;
+	border-radius: 12px;
+	box-shadow: 0 3.68rem 6.4rem rgba(40, 54, 91, 0.02),
+		0 1.6rem 2.4rem rgba(40, 54, 91, 0.014),
+		0 0.8rem 1.6rem rgba(40, 43, 53, 0.012),
+		0 0.4rem 0.8rem rgba(40, 54, 91, 0.01);
+}
+
+html.dark .donate-card {
+	background-color: var(--lv-leyka-card-bg);
+	border: 0;
+}
+
+/* Шапка и тело карточки — без полупрозрачного фона и разделителя. */
+.donate-form__header {
+	background-color: transparent;
+	border-bottom: 0;
+	padding: 1.25rem 1.5rem 0;
+}
+
+.donate-form__header h3 {
+	margin: 0 0 0.5rem;
+	font-size: 1.25rem;
+	font-weight: 600;
+	color: var(--lv-leyka-text);
+}
+
+.donate-form__header p {
+	margin: 0;
+	font-size: 0.9rem;
+	color: var(--lv-leyka-muted);
+}
+
+.donate-form__body {
+	padding: 1.25rem 1.5rem 1.5rem;
+}
+
+div[id*="leyka-pf-"] .leyka-tpl-star-form,
+div[id*="leyka-pf-"] .leyka-pm-form {
+	font-family: 'Gilroy', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+	font-size: 16px;
+	line-height: 1.4;
+}
+/* ------------------------------------------------------------ Тексты секций */
+.leyka-tpl-star-form .section {
+	margin-bottom: 24px;
+}
+
+.leyka-tpl-star-form .section .section-title-container .section-title-text {
+	font-family: 'Gilroy', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+	font-weight: 400;
+	font-size: 16px;
+	line-height: 1;
+	color: var(--lv-leyka-text);
+}
+
+.leyka-tpl-star-form .section .section--description {
+	background: var(--lv-leyka-note-bg);
+	border-radius: 6px;
+	padding: 10px 16px;
+	font-family: inherit;
+	font-weight: 400;
+	font-size: 15px;
+	line-height: 1.35;
+	color: var(--lv-leyka-muted);
+	margin: 0 0 24px;
+}
+
+/* ---------------------------------------------------------- Периодичность */
+.leyka-tpl-star-form .section .section__fields.periodicity {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0;
+}
+
+.leyka-tpl-star-form .section .section__fields.periodicity a {
+	height: 56px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: #ffffff;
+	border: 2px solid var(--lv-leyka-border);
+	border-radius: 100px;
+	color: var(--lv-leyka-text);
+	font-family: 'Gilroy', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+	font-weight: 400;
+	font-size: 16px;
+	line-height: 1;
+	text-transform: none;
+	margin: 0;
+	box-shadow: none;
+}
+
+.leyka-tpl-star-form .section .section__fields.periodicity a:first-of-type {
+	border-right-color: transparent;
+	border-radius: 100px 0 0 100px;
+}
+
+.leyka-tpl-star-form .section .section__fields.periodicity a:last-of-type {
+	border-radius: 0 100px 100px 0;
+}
+
+.leyka-tpl-star-form .section .section__fields.periodicity a.active,
+.leyka-screen-form .section .section__fields.periodicity a.active {
+	background-color: var(--lv-leyka-accent);
+	border-color: var(--lv-leyka-accent);
+	color: #ffffff;
+	z-index: 11;
+}
+/* -------------------------------------------------------------- Суммы */
+.leyka-tpl-star-form .section .section__fields .star-swiper .full-list .swiper-item {
+	background: transparent;
+	border: 1px solid var(--lv-leyka-border);
+	border-radius: 100px;
+	padding: 8px 16px;
+	position: relative;
+}
+
+.leyka-tpl-star-form .section .section__fields .star-swiper .full-list .swiper-item.selected {
+	background: var(--lv-leyka-accent);
+	border-color: var(--lv-leyka-accent);
+}
+
+.leyka-tpl-star-form .section .section__fields .star-swiper .full-list .swiper-item span,
+.leyka-tpl-star-form .section .section__fields .star-swiper .full-list .swiper-item input {
+	font-family: inherit;
+	font-weight: 400;
+	font-size: 16px;
+	color: var(--lv-leyka-text);
+}
+
+.leyka-tpl-star-form .section .section__fields .star-swiper .full-list .swiper-item.selected span,
+.leyka-tpl-star-form .section .section__fields .star-swiper .full-list .swiper-item.selected input {
+	color: #ffffff;
+}
+
+.leyka-tpl-star-form .section .section__fields .star-swiper .full-list .swiper-item .swiper-item-inner {
+	height: auto;
+	background: transparent;
+}
+
+/* --------------------------------------------------------- Способы оплаты */
+.leyka-tpl-star-form .section .section__fields.payments-grid .star-swiper .full-list .swiper-item {
+	background: transparent;
+	border: 1px solid var(--lv-leyka-border);
+	border-radius: 4px;
+	padding: 0;
+	height: 56px;
+	display: flex;
+	align-items: center;
+}
+
+.leyka-tpl-star-form .section .section__fields.payments-grid .star-swiper .full-list .swiper-item.selected {
+	background: var(--lv-leyka-accent-tint);
+	border-color: var(--lv-leyka-accent);
+}
+
+.leyka-tpl-star-form .section .section__fields.payments-grid .star-swiper .full-list .swiper-item span.payment-opt__label {
+	font-family: inherit;
+	font-weight: 400;
+	font-size: 15px;
+	color: var(--lv-leyka-text);
+}
+/* --------------------------------------------------------- Данные донора */
+.leyka-tpl-star-form .section .section__fields.donor .donor__textfield .leyka-star-field-frame,
+.leyka-screen-form .section .section__fields.donor .donor__textfield .leyka-star-field-frame {
+	background: transparent;
+	border: 0;
+	border-bottom: 1px solid var(--lv-leyka-border);
+	border-radius: 0;
+	padding: 12px 0;
+	min-height: 56px;
+}
+
+.leyka-tpl-star-form .section .section__fields.donor .donor__textfield input,
+.leyka-screen-form .section .section__fields.donor .donor__textfield textarea {
+	background: transparent;
+	border: 0;
+	border-radius: 0;
+	padding: 0;
+	color: var(--lv-leyka-text);
+	font-size: 16px;
+	font-family: inherit;
+}
+/* ------------------------------------------------------------- Кнопка */
+.leyka-tpl-star-form .section .section__fields .donor__submit input,
+.leyka-tpl-star-form .section .section__fields .donor__submit input {
+	background: var(--lv-leyka-accent);
+	border-radius: 100px;
+	color: #ffffff;
+	font-family: inherit;
+	font-size: 16px;
+	font-weight: 500;
+	padding: 16px;
+	border: 0;
+}
+
+.leyka-tpl-star-form .section .section__fields .donor__submit input:disabled {
+	background: rgba(243, 100, 33, 0.5);
+}
+
+/* -------------------------------------------------------------- Оферта */
+.leyka-tpl-star-form .section .section__fields .donor__oferta label {
+	font-family: inherit;
+	font-weight: 500;
+	font-size: 16px;
+	line-height: 20px;
+	color: var(--lv-leyka-text);
+}
+
+.leyka-tpl-star-form .section .section__fields .donor__oferta label a {
+	color: var(--lv-leyka-accent);
+	text-decoration: none;
+}
+
+.leyka-tpl-star-form .section .section__fields .donor__oferta input:checked + label:before {
+	background-color: var(--lv-leyka-accent);
+	border-color: var(--lv-leyka-accent);
+}
+/* --------------------------------------------------------- Тёмная тема */
+html.dark .leyka-tpl-star-form .section .section__fields.periodicity a {
+	background: transparent;
+}
+
+html.dark .leyka-tpl-star-form .section .section__fields.periodicity a.active {
+	background: var(--lv-leyka-accent);
+	color: #ffffff;
+}
+
+html.dark .leyka-tpl-star-form .section .section__fields .star-swiper .full-list .swiper-item.selected {
+	background: var(--lv-leyka-accent);
+}
+
+html.dark .leyka-tpl-star-form .section .section__fields .star-swiper .full-list .swiper-item span,
+html.dark .leyka-tpl-star-form .section .section__fields .star-swiper .full-list .swiper-item input {
+	color: var(--lv-leyka-text);
+}
+
+html.dark .leyka-tpl-star-form .section .section__fields .star-swiper .full-list .swiper-item.selected span,
+html.dark .leyka-tpl-star-form .section .section__fields .star-swiper .full-list .swiper-item.selected input {
+	color: #ffffff;
+}
+
+/* -------------------------------------------------------- Мобильная версия */
+@media screen and (max-width: 639px) {
+	html.dark .leyka-tpl-star-form .section .section__fields.payments-grid .star-swiper .full-list .swiper-item .payment-opt__button .payment-opt__icon img.pm-icon {
+		max-height: 3rem;
+		margin-right: 0.5rem;
+	}
+}
+
+/* Фокус и валидация полей донора: акцентная линия под полем. */
+.leyka-tpl-star-form .section .section__fields.donor .donor__textfield .leyka-star-field-frame:focus,
+.leyka-tpl-star-form .section .section__fields.donor .donor__textfield .leyka-star-field-frame.valid,
+.leyka-tpl-star-form .section .section__fields.donor .donor__textfield .leyka-star-field-frame.invalid {
+	background: transparent;
+	border-bottom-color: var(--lv-leyka-accent);
+}
+
+.leyka-tpl-star-form .section .section__fields.donor .donor__textfield input:focus,
+.leyka-tpl-star-form .section .section__fields.donor .donor__textfield textarea:focus,
+.leyka-tpl-star-form .section .section__fields.donor .donor__textfield textarea.valid,
+.leyka-tpl-star-form .section .section__fields.donor .donor__textfield textarea.invalid {
+	background: transparent;
+	border: 0;
+}
+
+/* Ширина самой формы — на всю колонку карточки. */
+div[id*="leyka-pf-"]:not(.alignwide):not(.alignfull):not(.alignleft):not(.alignright):not(.is-style-wide) {
+	max-width: 100%;
+	width: auto;
+	margin-top: 10px;
+}
+
+/* Подпись платформы Leyka скрыта. */
+.leyka-tpl-star-form .section.section--signature #leyka-platform-signature {
+	display: none;
+}
+
+/* --------------------------------------------------------- Финальные правки */
+/* Шапка карточки в тёмной теме — без фирменного фона. */
+html.dark .donate-form__header {
+	background-color: transparent;
+	border-bottom: 0;
+}
+
+/* Описание: плашка с призывом. */
+div[id*="leyka-pf-"].leyka-pf-star .leyka-tpl-star-form .section.section--description {
+	background: var(--lv-leyka-note-bg);
+	color: var(--lv-leyka-muted);
+	margin: 0 0 24px;
+	border-radius: 6px;
+	padding: 10px 16px;
+	font-size: 15px;
+	line-height: 1.35;
+	font-family: 'Gilroy', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* Заголовок секции — тёмный текст. */
+div[id*="leyka-pf-"].leyka-pf-star .leyka-tpl-star-form .section .section-title-container .section-title-text {
+	color: var(--lv-leyka-text);
+	font-size: 16px;
+}
+
+/* Тексты полей донора — Gilroy. */
+.leyka-tpl-star-form .section .section__fields.donor .donor__textfield label span.donor__textfield-label,
+.leyka-screen-form .section .section__fields.donor .donor__textfield label span.donor__textfield-label {
+	font-family: 'Gilroy', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+	font-size: 16px;
+}
+

@@ -28,13 +28,15 @@ defined( 'ABSPATH' ) || exit;
  */
 final class LV_Theme_Settings {
 
-	const PAGE_SLUG    = 'lv-theme-options';
-	const ACTION_SAVE  = 'lv_options_save';
-	const ACTION_RESET = 'lv_options_reset';
-	const NONCE        = 'lv_options';
-	const NONCE_FIELD  = '_lv_nonce';
-	const OPTION_KEY   = 'lv_site_settings';
-	const CAP          = 'edit_theme_options';
+	const PAGE_SLUG     = 'lv-theme-options';
+	const ACTION_SAVE   = 'lv_options_save';
+	const ACTION_RESET  = 'lv_options_reset';
+	const ACTION_EXPORT = 'lv_options_export';
+	const ACTION_IMPORT = 'lv_options_import';
+	const NONCE         = 'lv_options';
+	const NONCE_FIELD   = '_lv_nonce';
+	const OPTION_KEY    = 'lv_site_settings';
+	const CAP           = 'edit_theme_options';
 
 	/**
 	 * Экземпляр класса (синглтон).
@@ -67,7 +69,10 @@ final class LV_Theme_Settings {
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
 		add_action( 'admin_post_' . self::ACTION_SAVE, array( $this, 'handle_save' ) );
 		add_action( 'admin_post_' . self::ACTION_RESET, array( $this, 'handle_reset' ) );
+		add_action( 'admin_post_' . self::ACTION_EXPORT, array( $this, 'handle_export' ) );
+		add_action( 'admin_post_' . self::ACTION_IMPORT, array( $this, 'handle_import' ) );
 		add_action( 'wp_ajax_' . self::ACTION_SAVE, array( $this, 'handle_save_ajax' ) );
+		add_action( 'wp_ajax_' . self::ACTION_IMPORT, array( $this, 'handle_import_ajax' ) );
 	}
 
 	/* ----------------------------------------------------------------- Меню */
@@ -133,16 +138,20 @@ final class LV_Theme_Settings {
 			'lv-theme-settings',
 			get_template_directory_uri() . '/assets/css/settings.css',
 			array(),
-			'2.2.0'
+			'2.9.1'
 		);
 
 		wp_enqueue_script(
 			'lv-theme-settings',
 			get_template_directory_uri() . '/assets/js/settings.js',
-			array( 'jquery', 'media-views' ),
-			'2.2.0',
+			array( 'jquery', 'media-views', 'jquery-ui-datepicker', 'jquery-ui-sortable' ),
+			'2.9.0',
 			true
 		);
+
+		// Локализация календаря (месяцы, дни, первый день недели) берётся
+		// из настроек языка WordPress; экран всё равно рисует свои строки.
+		wp_localize_jquery_ui_datepicker();
 
 		// Без этих данных скрипт не перехватывает форму и она уходит
 		// обычным POST — то есть всё работает и без JS.
@@ -154,11 +163,14 @@ final class LV_Theme_Settings {
 				'action'  => self::ACTION_SAVE,
 				'nonce'   => wp_create_nonce( self::NONCE ),
 				'strings' => array(
-					'saving'  => __( 'Сохраняем…', 'lubov-vera' ),
-					'saved'   => __( 'Настройки сохранены.', 'lubov-vera' ),
-					'save'    => __( 'Сохранить', 'lubov-vera' ),
-					'failed'  => __( 'Не удалось сохранить. Проверьте соединение и попробуйте ещё раз.', 'lubov-vera' ),
-					'expired' => __( 'Сессия истекла. Обновите страницу.', 'lubov-vera' ),
+					'saving'        => __( 'Сохраняем…', 'lubov-vera' ),
+					'saved'         => __( 'Настройки сохранены.', 'lubov-vera' ),
+					'save'          => __( 'Сохранить', 'lubov-vera' ),
+					'failed'        => __( 'Не удалось сохранить. Проверьте соединение и попробуйте ещё раз.', 'lubov-vera' ),
+					'expired'       => __( 'Сессия истекла. Обновите страницу.', 'lubov-vera' ),
+					'imported'      => __( 'Настройки импортированы.', 'lubov-vera' ),
+					'importing'     => __( 'Импортируем…', 'lubov-vera' ),
+					'import_failed' => __( 'Не удалось импортировать. Проверьте формат JSON и попробуйте ещё раз.', 'lubov-vera' ),
 				),
 			)
 		);
@@ -175,11 +187,13 @@ final class LV_Theme_Settings {
 		}
 
 		// Данные для шаблонов.
-		$tabs       = lv_theme_options_schema();
-		$saved      = get_option( 'lv_site_settings', array() );
-		$saved      = is_array( $saved ) ? $saved : array();
-		$active_tab = isset( $_GET['tab'] ) ? sanitize_key( wp_unslash( $_GET['tab'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only tab state.
-		$updated    = isset( $_GET['updated'] ) ? sanitize_key( wp_unslash( $_GET['updated'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only notice flag.
+		$tabs        = lv_theme_options_schema();
+		$saved       = get_option( 'lv_site_settings', array() );
+		$saved       = is_array( $saved ) ? $saved : array();
+		$active_tab  = isset( $_GET['tab'] ) ? sanitize_key( wp_unslash( $_GET['tab'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only tab state.
+		$updated     = isset( $_GET['updated'] ) ? sanitize_key( wp_unslash( $_GET['updated'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only notice flag.
+		$imported    = isset( $_GET['lv_imported'] ) ? absint( $_GET['lv_imported'] ) : 0; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only notice counter.
+		$export_json = $this->build_export_json();
 
 		if ( '' === $active_tab || ! isset( $tabs[ $active_tab ] ) ) {
 			$active_tab = (string) array_key_first( $tabs );
@@ -204,6 +218,177 @@ final class LV_Theme_Settings {
 		}
 
 		require get_template_directory() . '/inc/options/views/page.php';
+	}
+
+	/* --------------------------------------------------- Экспорт / Импорт */
+
+	/**
+	 * JSON выгрузки текущих настроек.
+	 *
+	 * Экспортируется то, что реально лежит в опции (без дефолтов схемы):
+	 * настройки и есть единственный источник правды для фронта.
+	 *
+	 * @return string
+	 */
+	private function build_export_json() {
+		$saved = get_option( self::OPTION_KEY, array() );
+		$saved = is_array( $saved ) ? $saved : array();
+
+		return (string) wp_json_encode(
+			array(
+				'plugin'   => 'lubov-vera',
+				'exported' => current_time( 'mysql' ),
+				'settings' => $saved,
+			),
+			JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES
+		);
+	}
+
+	/**
+	 * Скачивание настроек в JSON-файл.
+	 *
+	 * Ссылка с nonce работает и без JS, поэтому файл отдаётся нативными
+	 * заголовками, а не через AJAX.
+	 */
+	public function handle_export() {
+		if ( ! current_user_can( self::CAP ) ) {
+			wp_die( 'Недостаточно прав.' );
+		}
+
+		check_admin_referer( self::NONCE, self::NONCE_FIELD );
+
+		nocache_headers();
+		header( 'Content-Type: application/json; charset=utf-8' );
+		header(
+			'Content-Disposition: attachment; filename=lv-site-settings-' . current_time( 'Ymd-Hi' ) . '.json'
+		);
+
+		echo $this->build_export_json(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Служебный JSON-файл выгрузки, не HTML.
+		exit;
+	}
+
+	/**
+	 * Импорт JSON одной строкой: разбор, санация, merge, запись.
+	 *
+	 * Общая для классического POST и AJAX, чтобы ветки не разошлись.
+	 *
+	 * @param string $json_string Сырой JSON из textarea.
+	 * @return array{ok:bool,message:string,applied:int}
+	 */
+	private function do_import( $json_string ) {
+		$data = json_decode( (string) $json_string, true );
+
+		if ( JSON_ERROR_NONE !== json_last_error() || ! is_array( $data ) ) {
+			return array(
+				'ok'      => false,
+				'message' => __( 'JSON повреждён или не разобран. Ожидается содержимое файла выгрузки.', 'lubov-vera' ),
+				'applied' => 0,
+			);
+		}
+
+		// Поддержка формата с обёрткой (plugin/exported/settings) и плоского.
+		$rows = isset( $data['settings'] ) && is_array( $data['settings'] ) ? $data['settings'] : $data;
+
+		$clean = $this->sanitize_values( $rows );
+
+		$current = get_option( self::OPTION_KEY, array() );
+		$current = is_array( $current ) ? $current : array();
+
+		// merge: ключи, которых нет в файле, уцелеть должны — как при сохранении.
+		$merged = array_merge( $current, $clean );
+
+		// Аудит импорта.
+		do_action( 'lv_options_import_before', $current, $merged );
+
+		update_option( self::OPTION_KEY, $merged );
+
+		if ( class_exists( '\LV_Core\Options' ) ) {
+			\LV_Core\Options::get_instance()->flush_cache();
+		}
+
+		return array(
+			'ok'      => true,
+			'message' => sprintf(
+				/* translators: %d: сколько ключей изменено импортом. */
+				__( 'Импортировано ключей: %d.', 'lubov-vera' ),
+				count( $clean )
+			),
+			'applied' => count( $clean ),
+		);
+	}
+
+	/**
+	 * Сырой JSON из POST. wp_unslash убирает слэши WordPress, которые иначе
+	 * ломают json_decode в do_import().
+	 *
+	 * @return string
+	 */
+	private function posted_import_json() {
+		if ( ! isset( $_POST['lv_import_json'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Nonce проверяется в обработчиках.
+			return '';
+		}
+
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash -- Сырой JSON, санациирует sanitize_values().
+		return (string) wp_unslash( $_POST['lv_import_json'] );
+	}
+
+	/**
+	 * Импортклассический POST без JS: разбор + редирект с notice.
+	 */
+	public function handle_import() {
+		if ( ! current_user_can( self::CAP ) ) {
+			wp_die( 'Недостаточно прав.' );
+		}
+
+		check_admin_referer( self::NONCE, self::NONCE_FIELD );
+
+		$result = $this->do_import( $this->posted_import_json() );
+
+		$args = array(
+			'page'    => self::PAGE_SLUG,
+			'tab'     => 'export_import',
+			'updated' => $result['ok'] ? 'imported' : 'import_failed',
+		);
+
+		if ( $result['ok'] ) {
+			$args['lv_imported'] = $result['applied'];
+		}
+
+		wp_safe_redirect( add_query_arg( $args, admin_url( 'admin.php' ) ) );
+		exit;
+	}
+
+	/**
+	 * Импорт без перезагрузки страницы (AJAX контракт как у сохранения).
+	 */
+	public function handle_import_ajax() {
+		if ( ! current_user_can( self::CAP ) ) {
+			wp_send_json_error(
+				array( 'message' => __( 'Недостаточно прав.', 'lubov-vera' ) ),
+				403
+			);
+		}
+
+		if ( ! wp_verify_nonce( isset( $_POST[ self::NONCE_FIELD ] ) ? sanitize_text_field( wp_unslash( $_POST[ self::NONCE_FIELD ] ) ) : '', self::NONCE ) ) {
+			wp_send_json_error(
+				array( 'message' => __( 'Сессия истекла. Обновите страницу.', 'lubov-vera' ) ),
+				403
+			);
+		}
+
+		$result = $this->do_import( $this->posted_import_json() );
+
+		if ( ! $result['ok'] ) {
+			wp_send_json_error( array( 'message' => $result['message'] ) );
+		}
+
+		wp_send_json_success(
+			array(
+				'message' => $result['message'],
+				'applied' => $result['applied'],
+				'time'    => current_time( 'H:i' ),
+			)
+		);
 	}
 
 	/* ------------------------------------------------------- Сохранение */
@@ -481,6 +666,9 @@ final class LV_Theme_Settings {
 					break;
 				case 'page_select':
 					$clean[ $key ] = absint( $value );
+					break;
+				case 'toggle':
+					$clean[ $key ] = ( '1' === (string) $value ) ? '1' : '0';
 					break;
 				case 'text':
 				default:

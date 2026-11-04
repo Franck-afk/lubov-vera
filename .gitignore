@@ -11,7 +11,9 @@
 
 # Node
 /node_modules/
+**/node_modules/
 /package-lock.json
+**/package-lock.json
 /yarn.lock
 
 # Build artifacts
@@ -48,3 +50,23 @@ wp-config-local.php
 # Debug
 debug.log
 error_log
+
+# Backups & staging (local only)
+/wpvividbackups/
+/wpvivid_staging/
+/upgrade/
+
+# Uploads (user-generated content, not part of code)
+/uploads/
+
+# AI assistant workspace
+/.workbuddy-ai/
+
+# Large third-party plugins (not project code)
+/plugins/quote-block/
+/plugins/wpvivid-backuprestore/
+/plugins/clearfy-pro/
+/plugins/leyka/
+
+# WordPress languages packs (auto-generated)
+/languages/

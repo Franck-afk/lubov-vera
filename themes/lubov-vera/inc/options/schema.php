@@ -28,7 +28,7 @@ if ( ! function_exists( 'lv_theme_options_schema' ) ) {
 		return array(
 
 			/* ------------------------------------------------- Главная */
-			'main'     => array(
+			'main'          => array(
 				'label'  => 'Главная',
 				'fields' => array(
 					'hero_badge'     => array(
@@ -83,7 +83,7 @@ if ( ! function_exists( 'lv_theme_options_schema' ) ) {
 			),
 
 			/* ------------------------------------------------ Карточки */
-			'cards'    => array(
+			'cards'         => array(
 				'label'  => 'Карточки',
 				'desc'   => 'Три карточки под hero. Блок исчезает, если у карточки нет заголовка и описания. Ссылка нужна обеим.',
 				'fields' => array(
@@ -144,7 +144,7 @@ if ( ! function_exists( 'lv_theme_options_schema' ) ) {
 			),
 
 			/* ----------------------------------------------- Контакты */
-			'contacts' => array(
+			'contacts'      => array(
 				'label'  => 'Контакты',
 				'desc'   => 'Выводятся в шапке и в подвале на всём сайте.',
 				'fields' => array(
@@ -167,7 +167,7 @@ if ( ! function_exists( 'lv_theme_options_schema' ) ) {
 			),
 
 			/* ------------------------------------------------- Соцсети */
-			'socials'  => array(
+			'socials'       => array(
 				'label'  => 'Соцсети',
 				'desc'   => 'Иконки под hero. Тип ограничен теми соцсетям, для которых есть значок в теме.',
 				'fields' => array(
@@ -199,7 +199,7 @@ if ( ! function_exists( 'lv_theme_options_schema' ) ) {
 			),
 
 			/* ---------------------------------------------- Расписание */
-			'schedule' => array(
+			'schedule'      => array(
 				'label'  => 'Расписание',
 				'desc'   => 'Блок «Расписание эфиров» на главной. Без строк не выводится.',
 				'fields' => array(
@@ -236,7 +236,7 @@ if ( ! function_exists( 'lv_theme_options_schema' ) ) {
 			),
 
 			/* -------------------------------------------------- Разделы */
-			'pages'    => array(
+			'pages'         => array(
 				'label'  => 'Разделы и архивы',
 				'desc'   => 'Заголовки и описания над архивами «Свидетельства» и «Служения».',
 				'fields' => array(
@@ -271,7 +271,7 @@ if ( ! function_exists( 'lv_theme_options_schema' ) ) {
 			),
 
 			/* ---------------------------------------------- Трансляции */
-			'broadcasts' => array(
+			'broadcasts'    => array(
 				'label'  => 'Настройки трансляций',
 				'desc'   => 'Настройки карточек на странице Трансляции.',
 				'fields' => array(
@@ -312,74 +312,217 @@ if ( ! function_exists( 'lv_theme_options_schema' ) ) {
 								'label' => 'Текст кнопки «Подробнее»',
 							),
 							array(
-								'key'     => 'show_avatar',
-								'type'    => 'toggle',
-								'label'   => 'Показывать аватар',
+								'key'   => 'show_avatar',
+								'type'  => 'toggle',
+								'label' => 'Показывать аватар',
 							),
 							array(
-								'key'     => 'show_photo',
-								'type'    => 'toggle',
-								'label'   => 'Показывать фото',
+								'key'   => 'show_photo',
+								'type'  => 'toggle',
+								'label' => 'Показывать фото',
 							),
 							array(
-								'key'     => 'show_title',
-								'type'    => 'toggle',
-								'label'   => 'Показывать заголовок',
+								'key'   => 'show_title',
+								'type'  => 'toggle',
+								'label' => 'Показывать заголовок',
 							),
 							array(
-								'key'     => 'show_desc',
-								'type'    => 'toggle',
-								'label'   => 'Показывать описание',
+								'key'   => 'show_desc',
+								'type'  => 'toggle',
+								'label' => 'Показывать описание',
 							),
 							array(
-								'key'     => 'show_author',
-								'type'    => 'toggle',
-								'label'   => 'Показывать автора',
+								'key'   => 'show_author',
+								'type'  => 'toggle',
+								'label' => 'Показывать автора',
 							),
 							array(
-								'key'     => 'show_date',
-								'type'    => 'toggle',
-								'label'   => 'Показывать дату',
+								'key'   => 'show_date',
+								'type'  => 'toggle',
+								'label' => 'Показывать дату',
 							),
 							array(
-								'key'     => 'show_avatar_single',
-								'type'    => 'toggle',
-								'label'   => 'Показывать аватар на одиночной',
+								'key'   => 'show_avatar_single',
+								'type'  => 'toggle',
+								'label' => 'Показывать аватар на одиночной',
 							),
 							array(
-								'key'     => 'show_reading_time',
-								'type'    => 'toggle',
-								'label'   => 'Показывать время чтения',
+								'key'   => 'show_reading_time',
+								'type'  => 'toggle',
+								'label' => 'Показывать время чтения',
 							),
 							array(
-								'key'     => 'show_views',
-								'type'    => 'toggle',
-								'label'   => 'Показывать просмотры',
+								'key'   => 'show_views',
+								'type'  => 'toggle',
+								'label' => 'Показывать просмотры',
 							),
 							array(
-								'key'     => 'show_readmore',
-								'type'    => 'toggle',
-								'label'   => 'Показывать кнопку «Подробнее»',
+								'key'   => 'show_readmore',
+								'type'  => 'toggle',
+								'label' => 'Показывать кнопку «Подробнее»',
 							),
 						),
 					),
 				),
 			),
 
-			/* ---------------------------------------------- Юридические */
-			'legal'    => array(
-				'label'  => 'Юридические страницы',
-				'desc'   => 'Нужны для ссылки в подвале и в тексте согласия на обработку данных.',
+			/* ------------------------------------------------- События */
+			'events'        => array(
+				'label'  => 'События',
+				'desc'   => 'Карусель карточек событий на главной — между блоком трансляций и календарём. Три карточки в ряду. Вверху слева на карточке — аватар, имя автора и дата публикации, внизу слева — заголовок и описание. Без строк карусель не выводится.',
 				'fields' => array(
-					'legal_policy'    => array(
-						'type'  => 'page_select',
-						'label' => 'Политика обработки персональных данных',
+					'events_show'     => array(
+						'type'    => 'toggle',
+						'label'   => 'Показывать карусель событий',
+						'desc'    => 'Выключите, чтобы скрыть блок на главной. Сами события при этом сохранятся.',
+						'default' => '1',
 					),
-					'legal_agreement' => array(
-						'type'  => 'page_select',
-						'label' => 'Согласие на обработку персональных данных',
+					'events_title'    => array(
+						'type'  => 'text',
+						'label' => 'Заголовок блока',
+						'desc'  => 'Если пусто — «События церкви»',
+					),
+					'events_subtitle' => array(
+						'type'  => 'text',
+						'label' => 'Подзаголовок блока',
+						'desc'  => 'Необязательная строка под заголовком',
+					),
+					'events'          => array(
+						'type'      => 'repeater',
+						'label'     => 'События',
+						'desc'      => 'Название обязательно — строка без него не попадёт в карусель.',
+						'add_label' => '+ Добавить событие',
+						'subfields' => array(
+							array(
+								'key'         => 'title',
+								'type'        => 'text',
+								'label'       => 'Название события',
+								'placeholder' => 'Молитвенное служение',
+							),
+							array(
+								'key'         => 'author_name',
+								'type'        => 'text',
+								'label'       => 'Имя автора',
+								'placeholder' => 'Пастор Иван',
+							),
+							array(
+								'key'   => 'author_avatar',
+								'type'  => 'media',
+								'label' => 'Аватар автора',
+								'desc'  => 'Выбирается из медиатеки WordPress. Пусто — будет только имя и дата.',
+								'wide'  => true,
+							),
+							array(
+								'key'         => 'date',
+								'type'        => 'datepicker',
+								'label'       => 'Дата публикации',
+								'placeholder' => 'дд.мм.гггг',
+							),
+							array(
+								'key'   => 'desc',
+								'type'  => 'text',
+								'label' => 'Краткое описание',
+								'wide'  => true,
+							),
+							array(
+								'key'   => 'image',
+								'type'  => 'media',
+								'label' => 'Картинка события',
+								'desc'  => 'Выбирается из медиатеки WordPress — станет фоном карточки. Пусто — карточка останется тёмной.',
+								'wide'  => true,
+							),
+							array(
+								'key'   => 'link',
+								'type'  => 'url',
+								'label' => 'Ссылка',
+								'desc'  => 'Заголовок станет ссылкой. Пусто — заголовок останется текстом.',
+							),
+						),
 					),
 				),
+			),
+
+			/* ------------------------------------------------ Документы */
+			'documents'     => array(
+				'label'  => 'Документы',
+				'desc'   => 'Список документов на странице «Документы»: слева список, справа просмотрщик (PDF и картинки). Файл обязателен — строка без него не попадёт в список.',
+				'fields' => array(
+					'documents' => array(
+						'type'      => 'repeater',
+						'label'     => 'Документы',
+						'desc'      => 'Файл обязательно — строка без него не попадёт на страницу.',
+						'add_label' => '+ Добавить документ',
+						'subfields' => array(
+							array(
+								'key'         => 'title',
+								'type'        => 'text',
+								'label'       => 'Название документа',
+								'placeholder' => 'Устав церкви',
+							),
+							array(
+								'key'   => 'file',
+								'type'  => 'file',
+								'label' => 'Файл',
+								'desc'  => 'Выбирается из медиатеки WordPress — PDF или картинка, просмотрщик понимает оба формата.',
+								'wide'  => true,
+							),
+						),
+					),
+				),
+			),
+
+			/* ------------------------------------------- Пожертвования */
+			'donation'      => array(
+				'label'  => 'Пожертвования',
+				'desc'   => 'Форма пожертвования на странице «Мы строим храм». Работает на плагине Leyka: форма подтягивается шорткодом по ID кампании. Сборы, донаты и способы оплаты настраиваются в разделе «Лейка» админки.',
+				'fields' => array(
+					'donation_show'        => array(
+						'type'    => 'toggle',
+						'label'   => 'Показывать форму пожертвования',
+						'desc'    => 'Выключите, чтобы убрать правую колонку с формой со страницы.',
+						'default' => '1',
+					),
+					'donation_title'       => array(
+						'type'  => 'text',
+						'label' => 'Заголовок формы',
+						'desc'  => 'Например «Поддержать строительство храма»',
+					),
+					'donation_desc'        => array(
+						'type'  => 'textarea',
+						'label' => 'Описание формы',
+						'desc'  => 'Короткая строка под заголовком.',
+						'rows'  => 3,
+					),
+					'donation_campaign_id' => array(
+						'type'  => 'text',
+						'label' => 'ID кампании Leyka',
+						'desc'  => 'ID кампании из раздела «Лейка → Кампании». Если пусто — вместо формы выводится заглушка.',
+					),
+				),
+			),
+
+			/* ---------------------------------------------- Юридические */
+				'legal'     => array(
+					'label'  => 'Юридические страницы',
+					'desc'   => 'Нужны для ссылки в подвале и в тексте согласия на обработку данных.',
+					'fields' => array(
+						'legal_policy'    => array(
+							'type'  => 'page_select',
+							'label' => 'Политика обработки персональных данных',
+						),
+						'legal_agreement' => array(
+							'type'  => 'page_select',
+							'label' => 'Согласие на обработку персональных данных',
+						),
+					),
+				),
+
+			/* ------------------------------------------- Экспорт / Импорт */
+			'export_import' => array(
+				'label'  => 'Экспорт / Импорт',
+				'desc'   => 'Резервная копия настроек: выгрузка текущих значений в JSON-файл и загрузка обратно. Ключи, которых нет в схеме, при импорте отбрасываются.',
+				'fields' => array(),
+				'custom' => 'export-import',
 			),
 		);
 	}

@@ -1,0 +1,1715 @@
+/* Тёмная тема */
+html.dark body {
+  background-color: #161616 !important;
+  color: #f9fafb !important;
+}
+
+/* Шапка */
+html.dark .header {
+  background-color: #161616 !important;
+  padding: 0.9rem 0 !important;
+}
+
+html.dark .header__inner {
+  padding: 0px 16px !important;
+}
+
+/* Навигация */
+html.dark .nav__link {
+  color: #ffffff !important;
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+html.dark .nav__link:hover {
+  color: #e5e7eb !important;
+}
+
+html.dark .nav__link--has-submenu {
+  justify-content: space-between;
+}
+
+html.dark .nav__arrow {
+  color: inherit;
+  transition: transform 0.3s ease;
+}
+
+html.dark .nav__item--has-submenu:hover .nav__arrow {
+  transform: rotate(180deg);
+}
+
+/* Иконка пункта меню */
+html.dark .nav__icon {
+  color: inherit;
+}
+
+/* Подменю */
+html.dark .submenu {
+  background-color: #161616 !important;
+  box-shadow: none;
+  z-index: 100;
+  padding: 0.5rem 0 !important;
+  border-radius: 0.5rem;
+  width: 12rem;
+  margin-top: 0.5rem;
+  list-style: none;
+}
+
+html.dark .submenu::before {
+  border-bottom-color: #161616;
+}
+
+html.dark .submenu li {
+  list-style: none;
+}
+
+html.dark .submenu > li > a,
+html.dark .submenu > li > .submenu__link {
+  color: #ffffff !important;
+  background: transparent !important;
+  display: block;
+  padding: 0.5rem 1rem !important;
+  margin: 0 !important;
+  text-decoration: none;
+  transition: background-color 0.2s, color 0.2s;
+  border-radius: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+html.dark .submenu > li > a:hover,
+html.dark .submenu > li > .submenu__link:hover {
+  background-color: #262626 !important;
+  color: #ffffff !important;
+}
+
+/* Fallback для wp_page_menu */
+html.dark .nav .menu-item a {
+  color: #ffffff;
+}
+
+html.dark .nav .menu-item a:hover {
+  color: #e5e7eb !important;
+}
+
+/* Кнопки действий */
+html.dark .header__actions {
+  display: none;
+  align-items: center;
+  gap: 1.5rem !important;
+}
+
+html.dark .header__phone {
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+html.dark .header__phone:hover {
+  color: #e5e7eb;
+}
+
+/* Переключатель темы */
+html.dark .theme-toggle {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  width: 36px;
+  height: 36px;
+  padding: 0 !important;
+  position: relative;
+}
+
+html.dark .theme-toggle:hover {
+  background-color: #e5e7eb;
+  color: #1f2937;
+}
+
+/* Кнопки */
+html.dark .btn {
+  background-color: #ffffff;
+  color: #1f2937;
+}
+
+html.dark .btn:hover {
+  background-color: #e5e7eb;
+  color: #1f2937;
+}
+
+html.dark .btn--primary {
+  background-color: #ffffff !important;
+  color: #1f2937 !important;
+}
+
+html.dark .header .btn {
+  background-color: #ffffff !important;
+  color: #1f2937 !important;
+}
+
+html.dark .header .btn:hover {
+  background-color: #e5e7eb !important;
+  color: #1f2937 !important;
+}
+
+/* Логотип */
+html.dark .logo__img {
+  filter: brightness(0) invert(1);
+}
+
+html.dark .footer__logo {
+  filter: brightness(0) invert(1);
+}
+
+/* Иконки темы */
+.sun-icon,
+.moon-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.theme-toggle .sun-icon,
+.theme-toggle .moon-icon {
+  width: 20px;
+  height: 20px;
+  display: block !important;
+}
+
+/* Текстовые метки темы */
+.theme-toggle__text {
+  font-size: 0.875rem;
+}
+
+.dark-hidden {
+  display: inline;
+}
+
+.dark-visible {
+  display: none;
+}
+
+html.dark .dark-hidden {
+  display: none;
+}
+
+/* Гамбургер */
+html.dark .hamburger {
+  background-color: transparent;
+}
+
+html.dark .hamburger__line {
+  background-color: #ffffff;
+}
+
+/* Мобильное меню */
+html.dark .mobile-menu {
+  background-color: #141414;
+}
+
+html.dark .mobile-menu__close {
+  color: #ffffff;
+}
+
+html.dark .mobile-menu__close:hover {
+  color: #ffffff;
+}
+
+/* Мобильная навигация */
+html.dark .nav--mobile .nav__link {
+  color: #ffffff;
+}
+
+html.dark .nav--mobile .nav__link:hover {
+  color: #e5e7eb;
+}
+
+html.dark .nav--mobile .nav__link--button {
+  color: #ffffff;
+  background: none;
+  border: none;
+}
+
+html.dark .nav--mobile .nav__link--button:hover {
+  color: #e5e7eb;
+}
+
+html.dark .nav--mobile .nav__link--button.open .nav__arrow {
+  transform: rotate(180deg);
+}
+
+/* Мобильное подменю */
+html.dark .mobile-submenu {
+  background-color: transparent;
+}
+
+html.dark .mobile-submenu__link {
+  color: #e5e7eb;
+}
+
+html.dark .mobile-submenu__link:hover {
+  color: #ffffff;
+  background-color: #262626 !important;
+}
+
+/* Fallback для wp_page_menu в мобильном меню */
+html.dark .nav--mobile .menu-item a {
+  color: #ffffff;
+}
+
+html.dark .nav--mobile .menu-item a:hover {
+  color: #e5e7eb;
+}
+
+/* Мобильные действия */
+html.dark .mobile-menu__phone {
+  border-color: #e5e7eb;
+  color: #1f2937;
+  background-color: #ffffff;
+}
+
+html.dark .mobile-menu__phone:hover {
+  background-color: #e5e7eb;
+  color: #1f2937;
+}
+
+html.dark .mobile-menu .btn {
+  background-color: #ffffff;
+  color: #1f2937;
+}
+
+html.dark .mobile-menu .btn:hover {
+  background-color: #e5e7eb;
+  color: #1f2937;
+}
+
+/* Мобильная кнопка регистрации */
+html.dark .header__mobile-reg {
+  background-color: #ffffff;
+  color: #1f2937;
+}
+
+html.dark .header__mobile-reg:hover {
+  background-color: #e5e7eb;
+  color: #1f2937;
+}
+
+/* Обёртка мобильной кнопки регистрации */
+html.dark .header__mobile-reg-wrapper {
+  background-color: #161616;
+  border-top-color: #262626;
+}
+
+/* Плавающая кнопка переключения темы */
+html.dark .theme-toggle-floating {
+  background-color: #262626;
+  border-color: #404040;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+html.dark .theme-toggle-floating:hover {
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
+}
+
+html.dark .theme-toggle-floating .sun-icon {
+  color: #f9fafb;
+  display: block !important;
+}
+
+html.dark .theme-toggle-floating .moon-icon {
+  color: #f9fafb;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  display: block !important;
+}
+
+/* Основной контент */
+html.dark #primary,
+html.dark .site-main,
+html.dark .main {
+  background-color: #141414 !important;
+  color: #ffffff !important;
+  overflow-x: clip;
+}
+
+/* Секция с таймером (тёмная тема) */
+html.dark .countdown-banner {
+  background-color: #161616;
+}
+
+html.dark .countdown-title {
+  color: #ffffff;
+}
+
+html.dark .countdown-date {
+  color: #9ca3af;
+}
+
+html.dark .countdown-link {
+  color: #ffffff;
+}
+
+html.dark .countdown-link:hover {
+  color: var(--lv-color-primary, #01a0e2);
+}
+
+/* Навигация по постам (тёмная тема) */
+html.dark .post-navigation {
+  border-top-color: rgba(237, 227, 211, 0.15);
+}
+
+html.dark .post-nav-link {
+  background-color: #161616;
+  border: 1px solid rgba(237, 227, 211, 0.15);
+}
+
+html.dark .post-nav-link:hover {
+  background-color: #161616;
+  border-color: rgba(237, 227, 211, 0.15);
+}
+
+html.dark .post-nav-label {
+  color: #9ca3af;
+}
+
+html.dark .post-nav-title {
+  color: #ffffff;
+}
+
+/* Адаптив для тёмной темы на мобильных */
+@media (max-width: 767px) {
+  html.dark .main {
+    padding-top: 0;
+  }
+
+  html.dark .header {
+    padding: 1rem 0 !important;
+  }
+
+  html.dark .header__inner {
+    padding: 0 !important;
+    gap: 0.75rem !important;
+  }
+
+  html.dark .header__mobile-reg-wrapper {
+    padding: 0.5rem 1rem !important;
+    background-color: #141414 !important;
+    border-top-color: #262626 !important;
+  }
+
+  html.dark .header .container {
+    padding: 0 20px !important;
+  }
+
+  html.dark .hero-container {
+    padding: 2rem 0 0;
+  }
+
+  html.dark .hero-container .content {
+    padding: 2rem 24px 1.5rem;
+  }
+
+  html.dark .cards-section {
+    padding: 2rem 0;
+  }
+
+  html.dark .calendar-section {
+    padding: 2rem 0;
+  }
+
+  html.dark .calendar-container {
+    padding: 15px 0 !important;
+  }
+
+  /* Заголовок календаря на мобильных */
+  html.dark .calendar-section .calendar-header {
+    padding: 15px 20px;
+  }
+
+  html.dark .calendar-section .calendar-header .nav-section {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  html.dark .calendar-section .calendar-header .title,
+  html.dark .calendar-section .calendar-header .date-range {
+    color: #ffffff;
+  }
+
+  html.dark .calendar-section .calendar-header .nav-button {
+    color: #ffffff;
+  }
+
+  html.dark .calendar-section .calendar-header .nav-button:hover {
+    color: #ffffff;
+    opacity: 0.8;
+  }
+
+  html.dark .footer {
+    padding: 80px 0 0;
+  }
+}
+
+/* Подвал */
+html.dark .footer {
+  background-color: #161616 !important;
+  color: #ffffff;
+  padding: 35px 0 0;
+  margin-top: auto;
+  position: relative;
+}
+
+html.dark .footer::before {
+  content: "";
+  position: absolute;
+  top: -80px;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background-color: #161616;
+  z-index: -1;
+}
+
+html.dark .footer__title {
+  color: #ffffff;
+}
+
+html.dark .footer__link,
+html.dark .footer__list li a {
+  color: #ffffff !important;
+}
+
+html.dark .footer__link:hover,
+html.dark .footer__list li a:hover {
+  color: #e5e7eb !important;
+}
+
+html.dark .footer__text {
+  color: #ffffff;
+}
+
+html.dark .footer__bottom {
+  border-color: #374151;
+}
+
+html.dark .footer__copyright {
+  color: #ffffff;
+}
+
+html.dark .footer__copyright:hover {
+  color: #e5e7eb;
+}
+
+/* ===== Первый экран (Hero) ===== */
+/* Рейтинг */
+html.dark .rating {
+  background: #262525;
+  color: #f3f4f6;
+}
+
+html.dark .stars {
+  color: #fbbf24;
+}
+
+/* Заголовок H1 */
+html.dark h1 {
+  color: #ffffff;
+}
+
+/* Параграфы */
+html.dark p {
+  color: #d1d5db;
+}
+
+html.dark .video-card {
+  background: #262525;
+}
+
+html.dark .video-card-title {
+  color: #ffffff;
+}
+
+html.dark .video-card-meta {
+  color: #9ca3af;
+}
+
+html.dark .video-card-play {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Социальные иконки */
+html.dark .social-icons {
+  background: #262525;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+html.dark .footer__social-icon {
+  background: var(--lv-color-primary, #01a0e2);
+}
+
+/* Левый блок (контент) */
+html.dark .content {
+  background-color: #161616;
+  border-top-left-radius: 16px;
+  border-bottom-left-radius: 16px;
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 767px) {
+  html.dark .content {
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  html.dark .image-container img {
+    border-radius: 16px;
+  }
+}
+
+/* Карточки */
+html.dark .card {
+  background: #161616;
+  /* border-top-color: #374151; */
+}
+
+html.dark .card-icon {
+  background: #374151;
+  color: #fff;
+}
+
+html.dark .card-icon svg {
+  color: #fff;
+}
+
+html.dark .card-icon img {
+  filter: brightness(0) invert(1);
+}
+
+html.dark .card h3 {
+  color: #f9fafb;
+}
+
+html.dark .card p {
+  color: #d1d5db;
+}
+
+/* Карусель событий - тёмная тема */
+html.dark .events-swiper-section__subtitle {
+  color: #d1d5db;
+}
+
+html.dark .events-swiper-section .event-card {
+  background: #161616;
+  border: 1px solid #262525;
+}
+
+html.dark .events-swiper-section .event-card__overlay {
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.65) 0%,
+    rgba(0, 0, 0, 0.45) 45%,
+    rgba(0, 0, 0, 0.85) 100%
+  );
+}
+
+html.dark .events-swiper-section .event-card .author-avatar {
+  border-color: var(--lv-color-accent, #3ab3e6);
+}
+
+html.dark .events-swiper-section .swiper-pagination-bullet {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+html.dark .events-swiper-section .swiper-pagination-bullet-active {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+/* Календарь - тёмная тема */
+html.dark .calendar-section .calendar-header {
+  background: #161616;
+  margin-bottom: 15px;
+  padding: 15px 20px;
+  border-radius: 12px;
+  border: 1px solid #262525;
+}
+
+html.dark .calendar-section .calendar-header .title,
+html.dark .calendar-section .calendar-header .date-range {
+  color: #ffffff;
+}
+
+html.dark .calendar-section .calendar-header .nav-button {
+  color: #ffffff;
+}
+
+html.dark .calendar-section .calendar-header .nav-button:hover {
+  color: #ffffff;
+  opacity: 0.8;
+}
+
+html.dark .calendar-container {
+  background: #161616;
+  border-color: #262525;
+  padding: 15px 20px;
+  padding-top: 20px;
+}
+
+html.dark .calendar-container .day-header-cell {
+  background-color: #262525;
+  color: #ffffff;
+}
+
+html.dark .calendar-container .day-card {
+  background: #1a1a1a;
+  border-color: #262525;
+}
+
+html.dark .calendar-container .day-card.empty {
+  background: #141414;
+}
+
+html.dark .calendar-container .day-card.today {
+  border-color: var(--lv-color-accent, #3ab3e6);
+  background-color: rgba(58, 179, 230, 0.1);
+}
+
+html.dark .calendar-container .day-header {
+  border-bottom-color: #262525;
+}
+
+html.dark .calendar-container .day-number {
+  color: #ffffff;
+}
+
+html.dark .calendar-container .events-section {
+  border-top-color: #262525;
+}
+
+html.dark .calendar-container .event-card {
+  background: #1a1a1a;
+  border-color: #262525;
+}
+
+html.dark .calendar-container .event-card-title {
+  color: #ffffff;
+}
+
+html.dark .calendar-container .event-card-location,
+html.dark .calendar-container .event-card-date {
+  color: #9ca3af;
+}
+
+/* Хлебные крошки - тёмная тема */
+html.dark .breadcrumbs__link {
+  color: #ffffff;
+}
+
+html.dark .breadcrumbs__current {
+  color: #b3b3b3;
+}
+
+/* Страницы кроме главной - тёмная тема */
+html.dark .page-title {
+  color: #ffffff;
+}
+
+html.dark .page-subtitle {
+  color: #9ca3af;
+}
+
+html.dark .page-content {
+  color: #d1d5db;
+  max-width: 1000px;
+  margin: 0;
+  text-align: left;
+}
+
+html.dark .page-content a {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+html.dark .page-content a:hover {
+  color: var(--lv-color-primary, #01a0e2);
+}
+
+html.dark .page-content h2,
+html.dark .page-content h3 {
+  color: #ffffff;
+}
+
+html.dark .page-content ul {
+  list-style: disc;
+  padding-left: 2rem;
+  margin-bottom: 1rem;
+}
+
+html.dark .page-content ul li {
+  margin-bottom: 0.5rem;
+}
+
+html.dark .construction-description h2,
+html.dark .construction-description h3 {
+  color: #ffffff;
+}
+
+html.dark .construction-description p,
+html.dark .construction-description ul li {
+  color: #d1d5db;
+}
+
+html.dark .construction-progress {
+  background-color: #0c4a6e;
+  border-color: var(--lv-color-primary, #01a0e2);
+}
+
+html.dark .progress-bar {
+  background-color: #1e3a5f;
+}
+
+html.dark .donate-card {
+  background-color: #1f2937;
+  border-color: #374151;
+}
+
+html.dark .donate-form__header {
+  background-color: #0c4a6e;
+  border-bottom-color: var(--lv-color-primary, #01a0e2);
+}
+
+html.dark .donate-form__header h3 {
+  color: #ffffff;
+}
+
+html.dark .donate-form__header p {
+  color: #9ca3af;
+}
+
+html.dark .form-label {
+  color: #d1d5db;
+}
+
+html.dark .form-input {
+  background-color: #1f2937;
+  border-color: #374151;
+  color: #ffffff;
+}
+
+html.dark .form-input:focus {
+  border-color: var(--lv-color-primary, #01a0e2);
+  box-shadow: 0 0 0 3px rgba(1, 160, 226, 0.2);
+}
+
+html.dark .form-input::placeholder {
+  color: #6b7280;
+}
+
+html.dark .amount-btn {
+  background-color: #ffffff;
+  border-color: #e5e7eb;
+  color: #1f2937;
+}
+
+html.dark .amount-btn:hover {
+  background-color: #e5e7eb;
+  border-color: #e5e7eb;
+  color: #1f2937;
+}
+
+html.dark .amount-btn.active {
+  background-color: #e5e7eb;
+  border-color: #e5e7eb;
+  color: #1f2937;
+}
+
+html.dark .payment-method {
+  background-color: #1f2937;
+  border-color: #374151;
+}
+
+html.dark .payment-method:hover {
+  background-color: #0c4a6e;
+  border-color: var(--lv-color-primary, #01a0e2);
+}
+
+html.dark .payment-method__label {
+  color: #d1d5db;
+}
+
+html.dark .checkbox-text {
+  color: #9ca3af;
+}
+
+html.dark .donation-form__note {
+  color: #9ca3af;
+}
+
+/* Реквизиты (тёмная тема) */
+html.dark .donation-requisites h4 {
+  color: #ffffff;
+}
+
+html.dark .requisite-item {
+  border-bottom-color: #374151;
+}
+
+html.dark .requisite-label {
+  color: #9ca3af;
+}
+
+html.dark .requisite-value {
+  color: #d1d5db;
+}
+
+html.dark .donation-note {
+  background-color: #0c4a6e;
+  border-color: var(--lv-color-primary, #01a0e2);
+}
+
+html.dark .donation-note p {
+  color: #7dd3fc;
+}
+
+html.dark .donation-note a {
+  color: var(--lv-color-primary, #01a0e2);
+}
+
+/* Фильтр карточек (тёмная тема) */
+html.dark .cards-filter .filter-btn {
+  border-color: #e5e7eb;
+  background: #ffffff;
+  color: #1f2937;
+}
+
+html.dark .cards-filter .filter-btn:hover {
+  border-color: #d1d5db;
+  background: #e5e7eb;
+  color: #1f2937;
+}
+
+html.dark .cards-filter .filter-btn.active {
+  background: #e5e7eb;
+  border-color: #e5e7eb;
+  color: #1f2937;
+}
+
+/* Анимация фильтрации карточек (тёмная тема) */
+html.dark .cards-grid .post-card,
+html.dark .post-card {
+  background: #161616 !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  border: 1px solid #262525;
+}
+
+html.dark .cards-grid .post-card .card-title,
+html.dark .cards-grid .post-card h3 {
+  color: #ffffff !important;
+}
+
+html.dark .cards-grid .post-card p,
+html.dark .cards-grid .post-card .card-description {
+  color: #e5e7eb !important;
+}
+
+html.dark .cards-grid .post-card .author-name {
+  color: #ffffff !important;
+}
+
+html.dark .cards-grid .post-card .post-date,
+html.dark .cards-grid .post-card .meta-item {
+  color: #ffffff !important;
+}
+
+html.dark .cards-grid .post-card .meta-item i {
+  color: #ffffff !important;
+}
+
+html.dark .cards-grid .post-card .card-button {
+  background-color: #ffffff !important;
+  color: #1f2937 !important;
+}
+
+html.dark .cards-grid .post-card .card-button:hover {
+  background-color: #e5e7eb !important;
+}
+
+/* Карточки служений (тёмная тема) */
+html.dark .cards-grid .ministry-card {
+  background: #161616 !important;
+  border: 1px solid #262525 !important;
+}
+
+html.dark .cards-grid .ministry-card .card-title {
+  color: #ffffff !important;
+}
+
+html.dark .cards-grid .ministry-card .card-description {
+  color: #e5e7eb !important;
+}
+
+html.dark .cards-grid .ministry-card:hover {
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Страница документов (тёмная тема) */
+html.dark .documents-page .page-subtitle {
+  color: #9ca3af;
+}
+
+html.dark .documents-list {
+  background: #161616;
+  border-color: #262525;
+}
+
+html.dark .documents-list__title {
+  color: #ffffff;
+  border-color: #262525;
+}
+
+html.dark .document-item {
+  border-color: transparent;
+}
+
+html.dark .document-item:hover {
+  background: #1f1f1f;
+  border-color: #262525;
+}
+
+html.dark .document-item.active {
+  background: #1f1f1f;
+  border-color: #262525;
+}
+
+html.dark .document-item__icon {
+  background: #1f1f1f !important;
+  color: #ffffff !important;
+}
+
+html.dark .document-item__title {
+  color: #ffffff;
+}
+
+html.dark .document-item__desc {
+  color: #9ca3af;
+}
+
+html.dark .document-item__meta {
+  color: #6b7280;
+}
+
+html.dark .documents-viewer {
+  background: #161616;
+  border-color: #262525;
+}
+
+html.dark .documents-viewer__header {
+  background: #161616;
+  border-color: #262525;
+}
+
+html.dark .documents-viewer__title {
+  color: #ffffff;
+}
+
+html.dark .documents-viewer__info {
+  gap: 0.25rem;
+}
+
+html.dark .documents-viewer__date {
+  color: #9ca3af;
+}
+
+html.dark .documents-viewer__btn {
+  color: #374151 !important;
+  background: #ffffff !important;
+  border-color: #d1d5db !important;
+}
+
+html.dark .documents-viewer__btn:hover {
+  background: #f3f4f6 !important;
+  border-color: #9ca3af !important;
+}
+
+html.dark .documents-viewer__btn--open {
+  color: #fff !important;
+  background: #161616 !important;
+  border-color: #262525 !important;
+}
+
+html.dark .documents-viewer__btn--open:hover {
+  background: #161616 !important;
+  border-color: #262525 !important;
+}
+
+html.dark .documents-viewer__container {
+  background: #0f0f0f;
+}
+
+html.dark .documents-viewer__container::-webkit-scrollbar-thumb {
+  background: #4b5563;
+}
+html.dark .documents-viewer__container::-webkit-scrollbar-thumb:hover {
+  background: var(--lv-color-primary, #01a0e2);
+}
+html.dark .documents-viewer__container {
+  scrollbar-color: #4b5563 transparent;
+}
+
+html.dark .documents-viewer__fallback {
+  background: #1f1f1f;
+}
+
+html.dark .documents-viewer__fallback p {
+  color: #9ca3af;
+}
+
+html.dark .documents-empty {
+  background: #161616;
+  border-color: #262525;
+}
+
+html.dark .documents-empty svg {
+  color: #374151;
+}
+
+html.dark .documents-empty h3 {
+  color: #ffffff;
+}
+
+html.dark .documents-empty p {
+  color: #9ca3af;
+}
+
+/* Страница соглашения ОПД (тёмная тема) */
+html.dark .page-content h2 {
+  color: #ffffff;
+}
+
+html.dark .page-content p {
+  color: #e5e7eb;
+}
+
+html.dark .page-content li {
+  color: #e5e7eb;
+}
+
+html.dark .page-content a {
+  color: var(--lv-color-primary, #01a0e2);
+}
+
+html.dark .page-content a:hover {
+  color: #0188c0;
+}
+
+/* Страница соглашения ОПД (тёмная тема) */
+html.dark .page-content h2,
+html.dark .page-content h3 {
+  color: #ffffff !important;
+}
+
+html.dark .page-content p,
+html.dark .page-content li {
+  color: #e5e7eb !important;
+}
+
+/* Страница политики ОПД (тёмная тема) */
+html.dark .policy-content h1,
+html.dark .page-content h1,
+html.dark .policy-content h2,
+html.dark .page-content h2,
+html.dark .policy-content h3,
+html.dark .page-content h3,
+html.dark .policy-content strong,
+html.dark .page-content strong {
+  color: #ffffff !important;
+}
+
+html.dark .policy-content p,
+html.dark .page-content p,
+html.dark .policy-content li,
+html.dark .page-content li {
+  color: #e5e7eb !important;
+}
+
+html.dark .policy-meta {
+  background: #1f1f1f !important;
+  border-color: #262525 !important;
+}
+
+html.dark .policy-meta__item {
+  color: #9ca3af !important;
+}
+
+html.dark .policy-meta__item i {
+  color: var(--lv-color-primary, #01a0e2) !important;
+}
+
+/* Просмотрщик PDF (тёмная тема) */
+html.dark body .pdf-render-container {
+  background: #ffffff !important;
+}
+
+html.dark body .pdf-render-container::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+html.dark body .pdf-render-container::-webkit-scrollbar-track {
+  background: #e5e7eb;
+  border-radius: 5px;
+}
+
+html.dark body .pdf-render-container::-webkit-scrollbar-thumb {
+  background: #9ca3af;
+  border-radius: 5px;
+}
+
+html.dark body .pdf-render-container::-webkit-scrollbar-thumb:hover {
+  background: #6b7280;
+}
+
+html.dark body .pdf-canvas {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+html.dark body .pdf-loading,
+html.dark body .pdf-error {
+  background: #ffffff !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+html.dark body .pdf-loading__spinner {
+  border-color: #e5e7eb;
+  border-top-color: var(--lv-color-primary, #01a0e2);
+}
+
+html.dark body .pdf-loading p,
+html.dark body .pdf-error p {
+  color: #6b7280;
+}
+
+html.dark body .pdf-error svg {
+  color: #ef4444;
+}
+
+html.dark body .pdf-controls {
+  background: #ffffff !important;
+  border-top-color: #e5e7eb;
+}
+
+html.dark body .pdf-controls__btn {
+  background: #ffffff !important;
+  border-color: #d1d5db;
+  color: #374151 !important;
+}
+
+html.dark body .pdf-controls__btn:hover {
+  background: #f3f4f6 !important;
+  border-color: #9ca3af;
+}
+
+html.dark body .pdf-controls__page,
+html.dark body .pdf-controls__zoom {
+  color: #6b7280 !important;
+}
+
+/* Single Page (тёмная тема) */
+html.dark .single-hero {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+html.dark .single-content-carousel {
+  box-shadow: none;
+}
+
+html.dark .single-content-carousel .swiper-button-prev,
+html.dark .single-content-carousel .swiper-button-next {
+  display: none;
+}
+
+/* Навигация слайдера на главной (тёмная тема) */
+html.dark .swiper-navigation {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+html.dark .swiper-button-next,
+html.dark .swiper-button-prev {
+  color: #ffffff !important;
+  background: transparent !important;
+  border: 2px solid #ffffff !important;
+  width: 48px !important;
+  height: 48px !important;
+}
+
+html.dark .swiper-button-next:hover,
+html.dark .swiper-button-prev:hover {
+  background: transparent !important;
+  border-color: #ffffff !important;
+  color: #ffffff !important;
+}
+
+html.dark .swiper-button-next::after,
+html.dark .swiper-button-prev::after {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23ffffff' viewBox='0 0 96 96'%3E%3Cpath d='M69.8437,43.3876,33.8422,13.3863a6.0035,6.0035,0,0,0-7.6878,9.223l30.47,25.39-30.47,25.39a6.0035,6.0035,0,0,0,7.6878,9.2231L69.8437,52.6106a6.0091,6.0091,0,0,0,0-9.223Z'/%3E%3C/svg%3E") !important;
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  width: 24px !important;
+  height: 24px !important;
+  content: "" !important;
+}
+
+html.dark .swiper-button-next:hover::after,
+html.dark .swiper-button-prev:hover::after {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23ffffff' viewBox='0 0 96 96'%3E%3Cpath d='M69.8437,43.3876,33.8422,13.3863a6.0035,6.0035,0,0,0-7.6878,9.223l30.47,25.39-30.47,25.39a6.0035,6.0035,0,0,0,7.6878,9.2231L69.8437,52.6106a6.0091,6.0091,0,0,0,0-9.223Z'/%3E%3C/svg%3E") !important;
+}
+
+html.dark .single-church-badge {
+  background: #161616;
+  border-color: rgba(237, 227, 211, 0.15);
+  color: #ffffff;
+}
+
+html.dark .single-church-badge i,
+html.dark .single-church-badge .fa-heart {
+  color: #ffffff;
+}
+
+html.dark .single-author__meta-item i {
+  color: var(--lv-color-primary, #01a0e2);
+}
+
+html.dark .single-title {
+  color: #ffffff;
+}
+
+html.dark .single-meta {
+  color: #9ca3af;
+  border-bottom-color: rgba(237, 227, 211, 0.15);
+}
+
+html.dark .single-meta i {
+  color: #ffffff;
+}
+
+html.dark .single-body {
+  color: #d1d5db;
+}
+
+html.dark .single-body h2 {
+  color: #ffffff;
+}
+
+html.dark .single-drop-cap:first-letter {
+  color: #ffffff !important;
+}
+
+html.dark .single-audio-card {
+  background: #0c4a6e;
+  border-color: var(--lv-color-primary, #01a0e2);
+}
+
+html.dark .single-audio-icon {
+  background: var(--lv-color-primary, #01a0e2);
+  color: #ffffff;
+}
+
+html.dark .single-audio-info p {
+  color: #ffffff;
+}
+
+html.dark .single-audio-info span {
+  color: #9ca3af;
+}
+
+html.dark .single-audio-play {
+  color: var(--lv-color-primary, #01a0e2);
+}
+
+/* Заголовки в сайдбаре - белые */
+html.dark .single-sidebar-title,
+html.dark .single-church-address,
+html.dark .single-service-times {
+  color: #ffffff !important;
+}
+
+/* Текст в цитате - белый */
+html.dark .single-scripture-quote,
+html.dark .single-quote-content p {
+  color: #ffffff !important;
+}
+
+html.dark .single-scripture-quote {
+  background: #161616;
+  border-left-color: #ffffff;
+  color: #ffffff !important;
+}
+
+html.dark .single-scripture-quote i {
+  color: #ffffff;
+}
+
+html.dark .single-church-address {
+  border-color: rgba(237, 227, 211, 0.15);
+}
+
+html.dark .single-service-times {
+  border-color: rgba(237, 227, 211, 0.15);
+}
+
+html.dark .single-quote-card {
+  background: #161616;
+  border-color: rgba(237, 227, 211, 0.15);
+}
+
+html.dark .single-quote-card i {
+  color: #ffffff;
+}
+
+/* Сетка с сайдбаром (тёмная тема) */
+html.dark .single-grid {
+  grid-template-columns: 1fr 320px;
+  gap: 3rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+html.dark .single-sidebar {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 100px;
+  height: 100%;
+}
+
+html.dark .single-sidebar-card {
+  background: #161616;
+  border-color: rgba(237, 227, 211, 0.15);
+}
+
+html.dark .single-sidebar-title {
+  color: #ffffff;
+  border-bottom-color: rgba(237, 227, 211, 0.15);
+}
+
+html.dark .single-sidebar-title i {
+  color: #ffffff !important;
+}
+
+html.dark .single-gospel-verse {
+  background: #0c4a6e;
+  border-color: rgba(237, 227, 211, 0.15);
+  color: #d1d5db;
+}
+
+html.dark .single-gospel-verse i {
+  color: #ffffff !important;
+}
+
+html.dark .single-gospel-ref {
+  color: #9ca3af;
+}
+
+html.dark .single-gospel-ref i {
+  color: #ffffff !important;
+}
+
+html.dark .single-category-list li {
+  border-bottom-color: rgba(237, 227, 211, 0.15);
+}
+
+html.dark .single-category-list li i {
+  color: #ffffff !important;
+}
+
+html.dark .single-category-list li a {
+  color: #d1d5db;
+}
+
+html.dark .single-category-list li a:hover {
+  color: #ffffff !important;
+}
+
+html.dark .single-calendar-icon {
+  background: #0c4a6e;
+  border-color: rgba(237, 227, 211, 0.15);
+}
+
+html.dark .single-calendar-icon i {
+  color: #ffffff !important;
+}
+
+html.dark .single-calendar-icon span {
+  color: #ffffff;
+}
+
+html.dark .single-quote-card {
+  background: #161616;
+  border-color: rgba(237, 227, 211, 0.15);
+}
+
+html.dark .single-quote-content i {
+  color: #ffffff !important;
+}
+
+html.dark .single-quote-content p {
+  color: #d1d5db;
+}
+
+/* Страница документов (тёмная тема) */
+html.dark .documents-filter .filter-btn {
+  border-color: #e5e7eb;
+  background: #ffffff;
+  color: #1f2937;
+}
+
+html.dark .documents-filter .filter-btn:hover {
+  border-color: #d1d5db;
+  background: #e5e7eb;
+  color: #1f2937;
+}
+
+html.dark .documents-filter .filter-btn.active {
+  background: #e5e7eb;
+  border-color: #e5e7eb;
+  color: #1f2937;
+}
+
+html.dark .document-card {
+  background: #1f2937;
+  border-color: #374151;
+}
+
+html.dark .document-card:hover {
+  border-color: var(--lv-color-primary, #01a0e2);
+  box-shadow: 0 4px 12px rgba(1, 160, 226, 0.2);
+}
+
+html.dark .document-card__title {
+  color: #ffffff;
+}
+
+html.dark .document-card__description {
+  color: #9ca3af;
+}
+
+html.dark .document-card__meta {
+  color: #6b7280;
+}
+
+html.dark .document-card__icon--pdf {
+  background: #450a0a;
+  color: #f87171;
+}
+
+/* Адрес церкви в сайдбаре (тёмная тема) */
+html.dark .single-church-address p {
+  color: #d1d5db;
+}
+
+/* ===== Страница документов (тёмная тема) ===== */
+html.dark .documents-filter .filter-btn {
+  border-color: #374151;
+  background: #1f2937;
+  color: #d1d5db;
+}
+
+html.dark .documents-filter .filter-btn:hover {
+  border-color: var(--lv-color-primary, #01a0e2);
+  color: var(--lv-color-primary, #01a0e2);
+}
+
+html.dark .documents-filter .filter-btn.active {
+  background: var(--lv-color-primary, #01a0e2);
+  border-color: var(--lv-color-primary, #01a0e2);
+  color: #ffffff;
+}
+
+html.dark .document-card {
+  background: #1f2937;
+  border-color: #374151;
+}
+
+html.dark .document-card:hover {
+  border-color: var(--lv-color-primary, #01a0e2);
+  box-shadow: 0 4px 12px rgba(1, 160, 226, 0.2);
+}
+
+html.dark .document-card__title {
+  color: #ffffff;
+}
+
+html.dark .document-card__description {
+  color: #9ca3af;
+}
+
+html.dark .document-card__meta {
+  color: #6b7280;
+}
+
+html.dark .document-card__icon--pdf {
+  background: #450a0a;
+  color: #f87171;
+}
+
+/* Окна документов */
+html.dark .document-window {
+  background: #161616;
+  border-color: rgba(237, 227, 211, 0.15);
+}
+
+html.dark .document-window__header {
+  background: #161616;
+  border-bottom-color: rgba(237, 227, 211, 0.15);
+}
+
+html.dark .document-window__title {
+  color: #ffffff;
+}
+
+html.dark .document-window__body {
+  background: #161616;
+}
+
+html.dark .document-window__placeholder {
+  color: #9ca3af;
+}
+
+html.dark .document-window__placeholder i {
+  color: var(--lv-color-primary, #01a0e2);
+}
+
+html.dark .document-window__placeholder h3 {
+  color: #ffffff;
+}
+
+html.dark .document-window__placeholder p {
+  color: #9ca3af;
+}
+
+/* Автор статьи (тёмная тема) */
+html.dark .single-author {
+  background: #161616;
+  border-color: rgba(237, 227, 211, 0.15);
+}
+
+html.dark .single-author__name {
+  color: #ffffff;
+}
+
+html.dark .single-author__role {
+  color: #9ca3af;
+}
+
+html.dark .single-author__meta {
+  color: #9ca3af;
+}
+
+html.dark .single-author__meta-item {
+  color: #9ca3af;
+}
+
+html.dark .single-author__meta-item i {
+  color: #ffffff !important;
+}
+
+html.dark .single-author__meta-divider {
+  color: #374151;
+}
+
+/* Сетка окон */
+html.dark .documents-grid {
+  background: transparent;
+}
+
+html.dark .single-church-address a {
+  color: #d1d5db;
+}
+
+html.dark .single-church-address a:hover {
+  color: var(--lv-color-primary, #01a0e2);
+}
+
+/* Время служений в сайдбаре (тёмная тема) */
+html.dark .single-service-times {
+  color: #d1d5db;
+}
+
+html.dark .single-service-times li {
+  color: #9ca3af;
+}
+
+/* Все иконки Font Awesome в сайдбаре - белые */
+html.dark .single-sidebar-card i,
+html.dark .single-sidebar-card .fa,
+html.dark .single-sidebar-card .fas,
+html.dark .single-sidebar-card .far,
+html.dark .single-sidebar-title i,
+html.dark .single-church-address i,
+html.dark .single-service-times i,
+html.dark .single-scripture-quote i,
+html.dark .single-quote-card i,
+html.dark .single-gospel-verse i,
+html.dark .single-gospel-ref i,
+html.dark .single-category-list li i,
+html.dark .single-calendar-icon i {
+  color: #ffffff !important;
+}
+
+html.dark .single-title,
+html.dark .single-author__name,
+html.dark .single-author__role,
+html.dark .single-author__meta-item,
+html.dark .single-author__meta-item span,
+html.dark .single-author__meta-divider,
+html.dark .single-body,
+html.dark .single-body p,
+html.dark .single-body h1,
+html.dark .single-body h2,
+html.dark .single-body h3,
+html.dark .single-body h4,
+html.dark .single-body h5,
+html.dark .single-body h6,
+html.dark .single-body ul,
+html.dark .single-body ol,
+html.dark .single-body li,
+html.dark .single-sidebar-title,
+html.dark .single-church-address,
+html.dark .single-church-address p,
+html.dark .single-church-address strong,
+html.dark .single-church-address a,
+html.dark .single-service-times,
+html.dark .single-service-times p,
+html.dark .single-service-times ul li,
+html.dark .post-nav-title,
+html.dark .post-nav-label,
+html.dark .breadcrumbs__link,
+html.dark .breadcrumbs__current {
+  color: #ffffff !important;
+}
+
+html.dark .single-sidebar-card {
+  background-color: #1a1a1a !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+html.dark .post-nav-link {
+  background-color: #1a1a1a !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+html.dark .post-nav-link:hover {
+  background-color: #262626 !important;
+}
+
+html.dark .section-title {
+  color: #ffffff !important;
+}
+
+/* Тёмная тема: Стакинг-карточки событий */
+html.dark .events-section .section-title {
+  color: #ffffff !important;
+}

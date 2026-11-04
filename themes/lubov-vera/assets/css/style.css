@@ -978,7 +978,7 @@ body {
 }
 
 /* Форма пожертвования */
-.donation-form {
+.donate-card {
   background-color: #ffffff;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -987,27 +987,27 @@ body {
   top: 100px;
 }
 
-.donation-form__header {
+.donate-form__header {
   padding: 1.5rem;
   background-color: #f0f9ff;
   border-bottom: 1px solid #e0f2fe;
   border-radius: 12px 12px 0 0;
 }
 
-.donation-form__header h3 {
+.donate-form__header h3 {
   margin: 0 0 0.5rem 0;
   font-size: 1.25rem;
   font-weight: 600;
   color: #1f2937;
 }
 
-.donation-form__header p {
+.donate-form__header p {
   margin: 0;
   font-size: 0.9rem;
   color: #6b7280;
 }
 
-.donation-form__body {
+.donate-form__body {
   padding: 1.5rem;
 }
 
@@ -1156,7 +1156,7 @@ body {
 
 /* Ограничение ширины формы Mixplat */
 @media screen and (min-width: 1110px) {
-  .donation-form__body {
+  .donate-form__body {
     max-width: 574px;
     margin: 0 auto;
   }
@@ -3297,6 +3297,108 @@ html.dark .document-item__btn:hover {
   background: rgba(0, 0, 0, 0.8);
 }
 
+/* ===== Карусель событий (Swiper) ===== */
+.events-swiper-section {
+  padding: 4rem 0;
+}
+
+.events-swiper-section .container {
+  display: block;
+  width: 100%;
+  max-width: var(--lv-content-width, 1400px);
+  margin: 0 auto;
+}
+
+.events-swiper-section__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+.events-swiper-section__subtitle {
+  margin: 8px 0 0;
+  color: #4b5563;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* Слайдер */
+.events-swiper {
+  padding-bottom: 48px;
+}
+
+/* Карточка события: картинка на фоне + оверлей, текст поверх.
+   ВАЖНО: все правила — только под .events-swiper-section! Класс .event-card
+   также используют карточки «Предстоящие события» в календаре (calendar.js),
+   и глобальные правила ломают их размер. */
+.events-swiper-section .event-card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 340px;
+  border-radius: 24px;
+  overflow: hidden;
+  background: #1f2937;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05),
+    0 8px 10px -6px rgba(0, 0, 0, 0.02);
+}
+
+.events-swiper-section .event-card__bg {
+  position: absolute;
+  inset: 0;
+}
+
+.events-swiper-section .event-card__bg img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.events-swiper-section .event-card__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.55) 0%,
+    rgba(0, 0, 0, 0.35) 45%,
+    rgba(0, 0, 0, 0.75) 100%
+  );
+}
+
+/* Контент поверх картинки: автор вверху слева, заголовок с описанием внизу слева */
+.events-swiper-section .event-card__content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+}
+
+.events-swiper-section .event-card .author-block {
+  margin-bottom: 0;
+}
+
+.events-swiper-section .event-card__text {
+  margin-top: auto;
+}
+
+.events-swiper-section .event-card .card-title {
+  margin-bottom: 0.5rem;
+  font-size: 1.35rem;
+}
+
+.events-swiper-section .event-card .card-description {
+  flex: 0;
+  margin-bottom: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
 /* ===== Подвал (светлая тема) ===== */
 .footer {
   background-color: #ffffff;
@@ -4245,7 +4347,7 @@ p {
 /* Основные стили слайдера - тень убрана */
 .swiper {
   width: 100%;
-  height: 400px;
+  height: 540px;
   border-radius: 20px;
   overflow: hidden;
   /* box-shadow удален */
@@ -4505,7 +4607,7 @@ p {
   top: 72px;
   left: 0;
   width: 100%;
-  height: 60vh;
+  height: calc(60vh + 540px);
   border-radius: 24px;
   z-index: 1;
   overflow: hidden;
@@ -4706,7 +4808,7 @@ p {
   }
 
   .stacking-card {
-    height: 70vh;
+    height: calc(70vh + 340px);
     border-radius: 16px;
   }
 
@@ -4815,10 +4917,11 @@ html.dark .stacking-section__subtitle {
 	height: 32px;
 }
 @media (max-width: 991px) {
+	/* Соцсети остаются поверх картинки, как на десктопе: контейнер имеет
+	   фиксированную высоту и overflow: hidden, поэтому статичный блок под
+	   картинкой просто обрезался. */
 	.hero-container .image-container .social-icons {
-		position: static;
-		display: inline-flex;
-		margin: 1.5rem auto 0;
-		justify-content: center;
+		right: 1rem;
+		bottom: 1rem;
 	}
 }

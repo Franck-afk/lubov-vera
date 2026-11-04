@@ -1,0 +1,908 @@
+@media (min-width: 1024px) {
+  .nav--desktop {
+    display: block;
+  }
+}
+
+@media (min-width: 1024px) {
+  .header__actions {
+    display: flex !important;
+    align-items: center;
+    gap: 1.5rem !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hamburger {
+    display: none;
+  }
+}
+
+/* Скрываем desktop элементы на мобильных */
+@media (max-width: 1023px) {
+  .nav--desktop {
+    display: none;
+  }
+
+  .header__actions {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+    z-index: 60;
+  }
+
+  /* Показываем мобильную кнопку регистрации */
+  .header__mobile-reg-wrapper {
+    display: block;
+  }
+
+  .header__mobile-reg {
+    display: flex;
+  }
+
+  /* Показываем плавающую кнопку переключения темы */
+  .theme-toggle-floating {
+    display: flex;
+  }
+}
+
+@media (min-width: 768px) {
+  .footer__grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Адаптивность для мобильных устройств (max-width: 767px) */
+@media (max-width: 767px) {
+  /* Убираем горизонтальный скролл */
+  body {
+    overflow-x: hidden;
+  }
+
+  /* Шапка на мобильных */
+  .header {
+    padding: 1rem 0 !important;
+  }
+
+  .header__inner {
+    padding: 0 !important;
+    gap: 0.75rem !important;
+  }
+
+  .header .container {
+    padding: 0 20px !important;
+  }
+
+  .logo__img {
+    width: 109px;
+  }
+
+  /* Обёртка для мобильной кнопки регистрации */
+  .header__mobile-reg-wrapper {
+    padding: 0.5rem 1rem !important;
+  }
+
+  /* Контейнеры на мобильных */
+  .container {
+    padding: 0 20px !important;
+  }
+
+  /* Изменение направления Flexbox для контейнера на вертикальное */
+  .hero-container {
+    flex-direction: column;
+    padding: 100px 0 30px;
+    gap: 0;
+  }
+
+  .hero-container .content,
+  .hero-container .image-container {
+    flex: 0 0 100%;
+    width: 100%;
+  }
+
+  /* Первый экран на мобильных */
+  .main {
+    padding-top: 0;
+  }
+
+  .hero-container .container {
+    padding: 0;
+  }
+
+  .hero-container .content {
+    height: auto;
+    padding: 2rem 18px 1.5rem;
+    border-radius: 16px 16px 0 0;
+  }
+
+  /* Первый экран на мобильных: картинка ниже квадрата, чтобы блок
+     hero не вытягивал первый экран по высоте. */
+  .hero-container .image-container {
+    height: auto;
+    aspect-ratio: 16 / 10;
+    border-radius: 0 0 16px 16px;
+  }
+
+  .hero-container .image-container img {
+    border-radius: 16px;
+  }
+
+  /* Соцсети — поверх картинки, как на десктопе. Статичный блок под
+     картинкой обрезается overflow: hidden у .image-container. */
+  .hero-container .image-container .social-icons {
+    position: absolute;
+    right: 1rem;
+    bottom: 1rem;
+    display: flex;
+    margin: 0;
+    justify-content: flex-start;
+    padding: 0.5rem;
+    gap: 0.75rem;
+    z-index: 2;
+  }
+
+  .hero-container .image-container .social-icon {
+    width: 42px;
+    height: 42px;
+  }
+
+  .hero-container .image-container .social-icon img {
+    width: 24px;
+    height: 24px;
+  }
+
+  /* Мобильное меню - одинаковые отступы */
+  .mobile-menu {
+    width: 100%;
+    max-width: 415px;
+  }
+
+  .mobile-menu__inner {
+    padding: 1rem;
+  }
+
+  .mobile-menu__header {
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .mobile-menu__actions .btn--primary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Мобильное подменю - тёмный текст для светлой темы */
+  .mobile-menu:not(.dark) .mobile-submenu__link {
+    color: #1f2937 !important;
+  }
+
+  .mobile-menu:not(.dark) .mobile-submenu__link:hover {
+    color: #374151 !important;
+  }
+
+  /* Мобильное подменю - белый текст для тёмной темы */
+  .dark .mobile-menu .mobile-submenu__link {
+    color: #ffffff !important;
+  }
+
+  .dark .mobile-menu .mobile-submenu__link:hover {
+    color: #e5e7eb !important;
+  }
+
+  /* Рейтинг на мобильных */
+  .hero-container .rating {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .hero-container .stars {
+    font-size: 14px;
+  }
+
+  /* Заголовок H1 на мобильных */
+  .hero-container h1 {
+    font-size: 1.8rem;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+
+  /* Описание на мобильных */
+  .hero-container p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-container .video-card {
+    padding: 0.75rem;
+    gap: 0.75rem;
+  }
+
+  .hero-container .video-card-title {
+    font-size: 0.85rem;
+  }
+
+  /* Хлебные крошки на мобильных */
+  .breadcrumbs {
+    margin-bottom: 1rem;
+  }
+
+  .breadcrumbs__list {
+    flex-wrap: wrap;
+  }
+
+  .breadcrumbs__item {
+    font-size: 0.75rem;
+  }
+
+  .page-title {
+    font-size: 1.8rem;
+  }
+
+  /* Фильтр карточек на мобильных */
+  .cards-filter {
+    gap: 0.5rem;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: 0.5rem;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .cards-filter .filter-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* Карточки служений на мобильных */
+  .cards-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .cards-grid .post-card {
+    padding: 1.25rem;
+  }
+
+  .cards-grid .ministry-card {
+    padding: 1.25rem;
+  }
+
+  .cards-grid .ministry-card .card-icon {
+    width: 60px;
+    height: 60px;
+  }
+
+  .cards-grid .ministry-card .card-title {
+    font-size: 1.1rem;
+  }
+
+  .cards-grid .ministry-card .card-description {
+    font-size: 0.9rem;
+  }
+
+  /* Мета-данные автора на мобильных */
+  .single-author__meta {
+    gap: 6px;
+    font-size: 0.8rem;
+  }
+
+  .single-author__meta-item {
+    gap: 3px;
+  }
+
+  .single-author__meta-item i {
+    font-size: 0.85rem;
+  }
+
+  /* Секция с таймером на мобильных */
+  .countdown-section {
+    padding: 15px 0 1rem;
+  }
+
+  .countdown-banner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .countdown-badge {
+    flex-direction: row;
+    gap: 0.5rem;
+    min-width: auto;
+  }
+
+  .countdown-label {
+    font-size: 0.65rem;
+  }
+
+  .countdown-timer {
+    font-size: 0.9rem;
+  }
+
+  .countdown-content {
+    width: 100%;
+  }
+
+  .countdown-title {
+    font-size: 0.95rem;
+  }
+
+  .countdown-date {
+    font-size: 0.8rem;
+  }
+
+  .countdown-link {
+    width: 100%;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    margin-top: 0.5rem;
+    padding-top: 0.75rem;
+  }
+
+  .dark .countdown-link {
+    border-top-color: rgba(255, 255, 255, 0.1);
+  }
+
+  /* Навигация по постам на мобильных */
+  .post-navigation {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+  }
+
+  .post-nav-link {
+    padding: 1rem;
+  }
+
+  .post-nav-link--next {
+    justify-content: flex-start;
+    text-align: left;
+  }
+
+  .post-nav-title {
+    font-size: 0.95rem;
+    white-space: normal;
+  }
+
+  /* Главное изображение на мобильных */
+  .single-main-image {
+    height: 250px;
+    margin-bottom: 1.5rem;
+    border-radius: 0;
+  }
+
+  /* Страница строительства на мобильных */
+  .construction-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .construction-slider {
+    height: 200px;
+    margin: 0 0 1.5rem 0;
+    border-radius: 0;
+  }
+
+  .construction-slider .swiper-button-prev,
+  .construction-slider .swiper-button-next {
+    width: 36px;
+    height: 36px;
+    left: 10px;
+    right: 10px;
+  }
+
+  .construction-slider .swiper-button-prev {
+    left: 10px;
+  }
+
+  .construction-slider .swiper-button-next {
+    right: 10px;
+  }
+
+  .donate-card {
+    position: static;
+  }
+
+  .donation-amounts {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Реквизиты на мобильных */
+  .requisite-item {
+    grid-template-columns: 1fr;
+    gap: 0.25rem;
+  }
+
+  .requisite-label {
+    font-weight: 700;
+    color: #6b7280;
+  }
+
+  /* Карточки - адаптив для мобильных */
+  .cards-section {
+    padding: 2rem 0;
+  }
+
+  .cards-section .container {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .cards-section .card {
+    padding: 24px;
+  }
+
+  .cards-section .card-icon {
+    width: 56px;
+    height: 56px;
+  }
+
+  .cards-section .card h3 {
+    font-size: 1.5rem;
+  }
+
+  .cards-section .card p {
+    font-size: 0.9rem;
+  }
+
+  /* Карусель событий - адаптив для мобильных */
+  .events-swiper-section {
+    padding: 2rem 0;
+  }
+
+  .events-swiper-section__header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .events-swiper-section .event-card {
+    min-height: 300px;
+  }
+
+  .events-swiper-section .event-card__content {
+    padding: 20px;
+  }
+
+  .events-swiper-section .event-card .card-title {
+    font-size: 1.2rem;
+  }
+
+  /* Календарь - адаптив для мобильных */
+  .calendar-section {
+    padding: 2rem 0;
+  }
+
+  .calendar-section .container {
+    padding: 0;
+  }
+
+  .calendar-container {
+    padding: 15px 20px !important;
+  }
+
+  /* Заголовок календаря на мобильных */
+  .calendar-section .calendar-header {
+    padding: 15px 20px;
+    margin-bottom: 15px;
+  }
+
+  .calendar-section .calendar-header .nav-section {
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .calendar-section .calendar-header .title {
+    font-size: 1rem;
+    text-align: left;
+    padding-left: 0;
+  }
+
+  .calendar-section .calendar-header .nav-buttons {
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .calendar-section .calendar-header .date-range {
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+
+  .calendar-section .calendar-header .nav-button {
+    width: 36px;
+    height: 36px;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .calendar-container .calendar-grid {
+    gap: 4px;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .calendar-container .day-header-cell {
+    font-size: 10px;
+    padding: 6px 0;
+    display: none;
+  }
+
+  .calendar-container .day-card {
+    height: 100px;
+    padding: 6px;
+  }
+
+  .calendar-container .day-name {
+    font-size: 10px;
+  }
+
+  .calendar-container .day-number {
+    font-size: 18px;
+  }
+
+  .calendar-container .events-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Подвал на мобильных */
+  .footer {
+    padding: 2rem 0 0;
+  }
+
+  .footer__grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .hero-container {
+    display: flex !important;
+    align-items: center;
+    padding: 100px 0 30px;
+    min-height: auto;
+  }
+
+  /* Single Page на мобильных */
+  .single-hero {
+    height: 250px;
+    margin-bottom: 1.5rem;
+    border-radius: 0;
+  }
+
+  .single-article {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-bottom: 2rem;
+  }
+
+  .single-title {
+    font-size: 1.8rem;
+    line-height: 1.3;
+    margin-bottom: 1rem;
+  }
+
+  .single-church-badge {
+    font-size: 0.85rem;
+    padding: 0.4rem 0.8rem;
+    margin-bottom: 1rem;
+  }
+
+  .single-meta {
+    font-size: 0.8rem;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    padding-bottom: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .single-meta__item {
+    flex: 0 0 calc(50% - 0.25rem);
+  }
+
+  .single-content-carousel {
+    height: 320px;
+    margin: 1.5rem 0;
+    border-radius: 0;
+  }
+
+  .single-content-carousel .swiper-slide {
+    width: 260px;
+    height: 300px;
+  }
+
+  .single-grid {
+    display: block !important;
+    grid-template-columns: none !important;
+    gap: 0 !important;
+    max-width: 100% !important;
+  }
+
+  .single-content {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .single-sidebar {
+    position: static !important;
+    width: 100% !important;
+    height: auto !important;
+    margin-top: 3rem !important;
+    display: block !important;
+  }
+
+  .single-sidebar-card {
+    position: static !important;
+    width: 100% !important;
+    margin-bottom: 1.5rem !important;
+  }
+
+  .single-drop-cap:first-letter {
+    font-size: 3.5rem;
+    margin-right: 0.6rem;
+    margin-top: 0.3rem;
+  }
+
+  .single-body {
+    font-size: 1rem;
+    line-height: 1.8;
+  }
+
+  .single-body h2 {
+    font-size: 1.5rem;
+    margin: 2.5rem 0 1rem;
+    line-height: 1.3;
+  }
+
+  .single-body p {
+    margin-bottom: 1.5rem;
+  }
+
+  .single-audio-card {
+    padding: 1.25rem;
+    gap: 1rem;
+    margin: 2rem 0;
+  }
+
+  .single-audio-icon {
+    width: 48px;
+    height: 48px;
+    font-size: 1.4rem;
+    flex-shrink: 0;
+  }
+
+  .single-audio-info p {
+    font-size: 1.05rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .single-audio-play {
+    font-size: 2rem;
+    flex-shrink: 0;
+  }
+
+  .single-scripture-quote {
+    padding: 1.25rem;
+    font-size: 1rem;
+    border-left-width: 4px;
+    margin: 2.5rem 0;
+  }
+
+  .single-sidebar-title {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+  }
+
+  .single-church-address p,
+  .single-service-times p,
+  .single-service-times li {
+    font-size: 0.95rem;
+  }
+
+  .single-church-address p {
+    margin-bottom: 1rem;
+  }
+
+  .single-service-times ul {
+    padding-left: 2rem;
+  }
+
+  .single-calendar-icon {
+    padding: 0.75rem 1rem;
+    margin-top: 1rem;
+  }
+
+  .single-calendar-icon i {
+    font-size: 1.6rem;
+  }
+
+  .single-calendar-icon span {
+    font-size: 0.95rem;
+  }
+
+  .single-quote-content i {
+    font-size: 1.5rem;
+  }
+
+  .single-quote-content p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  /* Страница документов на мобильных */
+  .documents-filter {
+    gap: 0.5rem;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: 0.5rem;
+  }
+
+  .documents-filter .filter-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .document-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.25rem;
+  }
+
+  .document-card__icon {
+    width: 48px;
+    height: 48px;
+    font-size: 1.5rem;
+  }
+
+  .document-card__title {
+    font-size: 1rem;
+  }
+
+  .document-card__description {
+    font-size: 0.85rem;
+  }
+
+  .document-card__meta {
+    gap: 1rem;
+    font-size: 0.8rem;
+  }
+
+  .document-card__btn {
+    width: 100%;
+    justify-content: center;
+    padding: 0.75rem;
+  }
+
+  /* Окна документов на мобильных */
+  .documents-grid {
+    gap: 1.5rem;
+  }
+
+  .document-window {
+    height: 500px;
+    border-radius: 8px;
+  }
+
+  .document-window__body {
+    min-height: 400px;
+  }
+
+  .document-window__header {
+    padding: 0.75rem 1rem;
+  }
+
+  .document-window__title {
+    font-size: 0.875rem;
+  }
+
+  /* Автор статьи на мобильных */
+  .single-author {
+    padding: 1rem;
+    gap: 0.75rem;
+  }
+
+  .single-author__avatar {
+    width: 48px;
+    height: 48px;
+  }
+
+  .single-author__name {
+    font-size: 1rem;
+  }
+
+  .single-author__role {
+    font-size: 0.85rem;
+  }
+
+  /* Просмотрщик документов на мобильных */
+  .document-viewer {
+    margin-top: 1.5rem;
+    border-radius: 0;
+  }
+
+  .document-viewer__header {
+    padding: 0.75rem 1rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .document-viewer__title {
+    font-size: 1rem;
+    flex: 1;
+  }
+
+  .document-viewer__close {
+    width: 32px;
+    height: 32px;
+  }
+
+  .document-viewer__body {
+    height: 600px;
+  }
+
+  /* PDF просмотрщик на мобильных */
+  .pdf-controls {
+    flex-wrap: wrap;
+    gap: 0.25rem;
+  }
+
+  .pdf-controls__btn {
+    width: 32px;
+    height: 32px;
+  }
+
+  .pdf-controls__btn--zoom {
+    width: 36px;
+  }
+
+  .pdf-controls__page,
+  .pdf-controls__zoom {
+    min-width: 60px;
+    font-size: 0.8rem;
+  }
+
+  .pdf-render-container {
+    padding: 10px;
+  }
+
+  /* Шапка просмотрщика на мобильных */
+  .documents-viewer__header {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .documents-viewer__info {
+    width: 100%;
+  }
+
+  .documents-viewer__title {
+    font-size: 1rem;
+  }
+
+  .documents-viewer__actions {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .documents-viewer__btn {
+    flex: 1;
+    justify-content: center;
+  }
+}

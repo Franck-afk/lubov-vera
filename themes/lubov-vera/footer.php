@@ -9,13 +9,14 @@
  * @package lubov-vera
  */
 
-$footer_addr  = function_exists( 'lv_get_address' ) ? lv_get_address() : '';
-$footer_phone = function_exists( 'lv_get_phone' ) ? lv_get_phone() : '';
-$footer_email = function_exists( 'lv_get_email' ) ? lv_get_email() : '';
+$footer_addr     = function_exists( 'lv_get_address' ) ? lv_get_address() : '';
+$footer_phone    = function_exists( 'lv_get_phone' ) ? lv_get_phone() : '';
+$footer_email    = function_exists( 'lv_get_email' ) ? lv_get_email() : '';
+$footer_schedule = function_exists( 'lv_get_schedule_groups' ) ? lv_get_schedule_groups() : array();
 ?>
 
 	<!-- Подвал сайта -->
-	<footer class="footer">
+	<footer class="footer" style="margin-top: 50px;">
 		<div class="container">
 		<div class="footer__grid">
 			<div class="footer__col">
@@ -102,9 +103,24 @@ $footer_email = function_exists( 'lv_get_email' ) ? lv_get_email() : '';
 			<p class="footer__text"><?php /* translators: %s: church email address. */ printf( esc_html__( 'E-mail: %s', 'lubov-vera' ), esc_html( $footer_email ) ); ?></p>
 			<?php endif; ?>
 			
+			<?php if ( ! empty( $footer_schedule ) ) : ?>
 			<p class="footer__text">
-				<?php echo wp_kses_post( __( 'Общецерковные служения:<br />Вс. 10:00, 12:00, 17:00', 'lubov-vera' ) ); ?>
+				<?php esc_html_e( 'Расписание служений:', 'lubov-vera' ); ?><br />
+				<?php
+				$footer_schedule_lines = array();
+
+				foreach ( $footer_schedule as $footer_group ) {
+					if ( empty( $footer_group['times'] ) ) {
+						continue;
+					}
+
+					$footer_schedule_lines[] = $footer_group['short'] . ' ' . implode( ', ', $footer_group['times'] );
+				}
+
+				echo esc_html( implode( ', ', $footer_schedule_lines ) );
+				?>
 			</p>
+			<?php endif; ?>
 
 			</div>
 		</div>
